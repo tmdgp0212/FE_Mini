@@ -1,7 +1,8 @@
 import Admin from './Admin'
 import Home from './Home'
-import Login from './Login'
 import Signup from './Signup'
 import User from './User'
+import NotFound from './404'
+import Logout from './Logout'
 
-export { Home, Login, Signup, User, Admin }
+export { Home, Signup, User, Admin, Logout, NotFound }

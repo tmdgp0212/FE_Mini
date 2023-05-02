@@ -8,6 +8,7 @@ module.exports = {
     // 'prettier/prettier': 'error',
     // 'react/react-in-jsx-scope': 'off',
     'react-refresh/only-export-components': 'warn',
+    '@typescript-eslint/no-empty-interface': 'off',
   },
   settings: {
     'import/parsers': {

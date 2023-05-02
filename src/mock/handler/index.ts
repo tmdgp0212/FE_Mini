@@ -1,14 +1,6 @@
 import { rest } from 'msw'
 import { ApiResponse } from '../../types/response'
+import { userHandler } from './user'
+import { vacationHandler } from './vacation'
 
-export const handler = [
-  rest.get('/test', (req, res, ctx) => {
-    return res(
-      ctx.json<ApiResponse>({
-        status: 200,
-        message: 'success',
-        data: true,
-      }),
-    )
-  }),
-]
+export const handler = [...userHandler, ...vacationHandler]

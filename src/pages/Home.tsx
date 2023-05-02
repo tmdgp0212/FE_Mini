@@ -4,11 +4,11 @@ import { useProtectedOulet } from '../hooks/useProtectedOutlet'
 function Home() {
   const user = useProtectedOulet()
 
-  return user ? (
+  return (
     <div>
       <BigCalendar />
     </div>
-  ) : null
+  )
 }
 
 export default Home

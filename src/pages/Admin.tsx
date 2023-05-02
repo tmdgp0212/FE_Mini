@@ -1,10 +1,11 @@
-import { UserRole } from '../routes/ProtectedRouter'
+import { Outlet } from 'react-router-dom'
 import { useProtectedOulet } from '../hooks/useProtectedOutlet'
+import { UserRole } from '../types/user'
 
 function Admin() {
   const user = useProtectedOulet()
 
-  return user && user.role === UserRole.Admin ? <div>Admin role: {JSON.stringify(user)}</div> : null
+  return user && user.role === UserRole.Admin ? <Outlet /> : null
 }
 
 export default Admin

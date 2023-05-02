@@ -1,9 +1,10 @@
+import { Outlet } from 'react-router-dom'
 import { useProtectedOulet } from '../hooks/useProtectedOutlet'
 
 function User() {
   const user = useProtectedOulet()
 
-  return user ? <div>User</div> : null
+  return user ? <Outlet /> : null
 }
 
 export default User

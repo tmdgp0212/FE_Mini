@@ -8,7 +8,7 @@ export const useProtectedOulet = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (!user) navigate('/login')
+    if (!user) navigate('/')
   }, [user])
 
   return user
