@@ -13,7 +13,7 @@ function ProtectedRouter() {
     name: '정석화',
     role: UserRole.Admin,
     department: '개발',
-    // profile: 'https://picsum.photos/seed/picsum/200/300',
+    profile: 'https://picsum.photos/seed/picsum/200/300',
   })
 
   return <Layout user={user} />
