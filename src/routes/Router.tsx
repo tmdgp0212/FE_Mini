@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Admin, Home, NotFound, Signup, User, Logout } from '../pages'
+import { Admin, Home, NotFound, Signup, User, Logout, EditProfile } from '../pages'
 import ProtectedRouter from './ProtectedRouter'
 
 function Router() {
@@ -9,7 +9,7 @@ function Router() {
         <Route element={<ProtectedRouter />}>
           <Route path="/" element={<Home />} />
           <Route path="/user" element={<User />}>
-            <Route path="mypage" element={<>내 정보 수정</>} />
+            <Route path="mypage" element={<EditProfile />} />
             <Route path="vacation" element={<>내 연차/당직 관리</>} />
           </Route>
           <Route path="/admin" element={<Admin />}>
