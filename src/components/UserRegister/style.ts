@@ -13,6 +13,9 @@ export const Container = styled.div`
   gap: 30px;
   padding: 20px;
 
+  input {
+    width: 20px;
+  }
   img {
     width: 120px;
     height: 120px;

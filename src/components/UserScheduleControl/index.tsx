@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import VacationUserTable from '../VacationUserTable'
+import UserSchedule from '../UserSchedule'
 import * as S from './style'
 
 export const testUser = [
@@ -50,15 +50,38 @@ export const testUser = [
   },
 ]
 
-function SearchedTypeTable() {
-  const [checkItems, setCheckItems] = useState([])
+function UserScheduleControl() {
+  const [checkItems, setCheckItems] = useState<string[]>([])
+
+  const checkedItemHandler = (id: string, isChecked: Boolean) => {
+    if (isChecked) {
+      setCheckItems([...checkItems, id])
+    } else {
+      setCheckItems(checkItems.filter((el) => el !== id))
+    }
+  }
+
+  const onCheckAll = (checked: Boolean) => {
+    if (checked) {
+      const idArray: string[] = []
+      testUser.forEach((item) => idArray.push(item.employeeNumber))
+      setCheckItems(idArray)
+    } else {
+      setCheckItems([])
+    }
+  }
 
   return (
     <>
       <S.Thead>
         <tr>
           <th>
-            <input type="checkbox" name="select-all" />
+            <input
+              type="checkbox"
+              name="select-all"
+              onChange={(e) => onCheckAll(e.target.checked)}
+              checked={checkItems.length === testUser.length ? true : false}
+            />
           </th>
           <th>이름</th>
           <th>사번</th>
@@ -68,12 +91,17 @@ function SearchedTypeTable() {
         </tr>
       </S.Thead>
       <S.Tbody>
-        {testUser.map((item) => (
-          <VacationUserTable user={item} />
+        {testUser.map((user) => (
+          <UserSchedule
+            key={user.employeeNumber}
+            user={user}
+            checkItems={checkItems}
+            checkItemHandler={checkedItemHandler}
+          />
         ))}
       </S.Tbody>
     </>
   )
 }
 
-export default SearchedTypeTable
+export default UserScheduleControl

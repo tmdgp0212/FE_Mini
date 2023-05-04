@@ -1,5 +1,6 @@
 import * as S from './style'
 import IconHuman from '../../assets/man.png'
+import { useEffect, useState } from 'react'
 
 interface RegisterUser {
   name: string
@@ -10,10 +11,35 @@ interface RegisterUser {
   joinDate: string
 }
 
-function RegisterUserTable({ user }: { user: RegisterUser }) {
+function UserRegister({
+  user,
+  checkItems,
+  checkItemHandler,
+}: {
+  user: RegisterUser
+  checkItems: string[]
+  checkItemHandler: Function
+}) {
+  const [isClicked, setIsClicked] = useState(false)
+
+  const onCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    checkItemHandler(e.target.value, e.target.checked)
+    setIsClicked(e.target.checked)
+  }
+
+  useEffect(() => {
+    setIsClicked(checkItems.includes(user.employeeNumber))
+  }, [checkItems])
+
   return (
     <S.Container>
-      <input type="checkbox" name={`select-${user.employeeNumber}`} />
+      <input
+        type="checkbox"
+        name={`select-${user.employeeNumber}`}
+        checked={isClicked}
+        value={user.employeeNumber}
+        onChange={(e) => onCheck(e)}
+      />
       <img src={IconHuman} alt="사용자" />
       <S.UserInfo>
         <div className="userName">{user.name}</div>
@@ -29,4 +55,4 @@ function RegisterUserTable({ user }: { user: RegisterUser }) {
   )
 }
 
-export default RegisterUserTable
+export default UserRegister
