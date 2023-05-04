@@ -47,10 +47,10 @@ const size = {
   },
   font: {
     small: '14px',
-    base: '18px',
-    medium: '24px',
-    large: '36px',
-    title: '48px',
+    base: '16px',
+    medium: '20px',
+    large: '24px',
+    title: '36px',
   },
 }
 
