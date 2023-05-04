@@ -1,7 +1,7 @@
 import React from 'react'
 import * as S from './style'
 import { ReactComponent as Logo } from '../../assets/logo.svg'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useLocation } from 'react-router-dom'
 import { AiOutlineUser } from 'react-icons/ai'
 import { GrHomeRounded, GrUserAdmin } from 'react-icons/gr'
 import { MdLogout } from 'react-icons/md'
@@ -14,6 +14,7 @@ interface LayoutProps {
 }
 
 function Layout({ user }: LayoutProps) {
+  const location = useLocation()
   return (
     <S.Grid>
       <S.Header>
@@ -50,7 +51,15 @@ function Layout({ user }: LayoutProps) {
           <MdLogout /> Logout
         </S.NavItem>
       </S.Nav>
-      <S.Page>{user ? <Outlet context={{ user }} /> : <div>로그인 해주세요</div>}</S.Page>
+      <S.Page>
+        {user ? (
+          <Outlet context={{ user }} />
+        ) : location.pathname === '/signup' ? (
+          <Outlet />
+        ) : (
+          <div>로그인 해주세요</div>
+        )}
+      </S.Page>
     </S.Grid>
   )
 }

@@ -3,10 +3,17 @@ import { UserPayload } from '../../types/user'
 import Avatar from '@mui/material/Avatar'
 import { LoginForm } from '../Form'
 import { useTheme } from '@mui/material'
+import { Link } from 'react-router-dom'
+import styled from '@emotion/styled'
 
 interface UserAreaProps {
   user?: UserPayload | null
 }
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: ${({ theme }) => theme.app.palette.black};
+`
 
 function UserArea({ user }: UserAreaProps) {
   const theme = useTheme()
@@ -22,7 +29,7 @@ function UserArea({ user }: UserAreaProps) {
   ) : (
     <div style={{ display: 'flex' }}>
       <LoginForm />
-      <button>register</button>
+      <StyledLink to="/signup">register</StyledLink>
     </div>
   )
 }
