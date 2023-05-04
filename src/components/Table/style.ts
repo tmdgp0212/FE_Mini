@@ -23,6 +23,9 @@ export const Table = styled.table`
       height: 60px;
       text-align: center;
       line-height: 60px;
+      input {
+        vertical-align: middle;
+      }
     }
   }
 `
