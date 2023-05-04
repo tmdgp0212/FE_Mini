@@ -6,16 +6,19 @@ export const createCalendarEvent = ({
   start,
   end,
   allDay,
+  type,
 }: {
   title: string
   start: string
   end: string
   allDay?: boolean
+  type: string
 }) => {
   return {
     title,
     start: dayjsInstance(start).toDate(),
     end: dayjsInstance(end).toDate(),
     allDay: !!allDay,
+    type,
   } as Event
 }
