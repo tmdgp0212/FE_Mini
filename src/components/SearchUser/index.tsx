@@ -1,6 +1,9 @@
+import { useTheme } from '@emotion/react'
+import Button from '../Button'
 import * as S from './style'
 
 function SearchUser() {
+  const theme = useTheme()
   return (
     <S.SearchForm>
       <S.SearchType>
@@ -13,7 +16,9 @@ function SearchUser() {
       </S.SearchType>
 
       <input type="text" />
-      <button>검색</button>
+      <Button bg={theme.app.palette.green1} fontColor={theme.app.palette.white}>
+        검색
+      </Button>
     </S.SearchForm>
   )
 }

@@ -5,7 +5,7 @@ import MaterialAccordionSummary from '@mui/material/AccordionSummary'
 
 export const NestedNavItem = styled(StyledLayout.NavItem)`
   &:not(:last-child) {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
   }
 `
 export const NestedNavMainIconWrapper = styled.div`
@@ -18,7 +18,7 @@ export const NestedNavMainIconWrapper = styled.div`
 `
 
 export const Accordion = styled(MaterialAccordion)`
-  width: 85%;
+  width: 100%;
   background-color: transparent;
   box-shadow: none;
   &::before {
@@ -27,5 +27,5 @@ export const Accordion = styled(MaterialAccordion)`
 `
 
 export const AccordionSummary = styled(MaterialAccordionSummary)`
-  padding: 4px 8px;
+  padding: 4px;
 `
