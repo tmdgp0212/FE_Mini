@@ -75,7 +75,7 @@ export const NavGroup = styled.div`
 
 export const Page = styled.div`
   position: relative;
-  padding: 40px;
+  padding: 40px 80px;
   grid-area: page;
   overflow: auto;
 `

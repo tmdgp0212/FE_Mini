@@ -1,6 +1,17 @@
+import { UserEntity } from '../../types/user'
 import * as S from './style'
 
-function SearchedUserTable() {
+interface SearchedUserProps {
+  users: UserEntity[]
+  ModalHandler: React.Dispatch<React.SetStateAction<boolean>>
+  setUserData: React.Dispatch<React.SetStateAction<UserEntity>>
+}
+
+function SearchedUserTable({ users, ModalHandler, setUserData }: SearchedUserProps) {
+  const openModal = (user: UserEntity) => {
+    ModalHandler(true)
+    setUserData(user)
+  }
   return (
     <>
       <S.Thead>
@@ -14,22 +25,18 @@ function SearchedUserTable() {
         </tr>
       </S.Thead>
       <S.Tbody>
-        <tr>
-          <td>조승혜</td>
-          <td>12341234</td>
-          <td>개발</td>
-          <td>과장</td>
-          <td>관리자</td>
-          <td className="edit-btn">수정</td>
-        </tr>
-        <tr>
-          <td>조승혜</td>
-          <td>12341234</td>
-          <td>개발</td>
-          <td>과장</td>
-          <td>관리자</td>
-          <td className="edit-btn">수정</td>
-        </tr>
+        {users.map((user) => (
+          <tr>
+            <td>{user.name}</td>
+            <td>{user.employeeNumber}</td>
+            <td>{user.department}</td>
+            <td>{user.position}</td>
+            <td>{user.role}</td>
+            <td className="edit-btn" onClick={() => openModal(user)}>
+              수정
+            </td>
+          </tr>
+        ))}
       </S.Tbody>
     </>
   )
