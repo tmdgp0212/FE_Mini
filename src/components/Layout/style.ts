@@ -15,7 +15,7 @@ export const Grid = styled.div`
 
 export const Header = styled.header`
   box-sizing: border-box;
-  padding: 8px 16px;
+  padding: 8px 25px;
   grid-area: header;
   background-color: ${({ theme }) => theme.app.palette.white};
   position: sticky;
@@ -36,19 +36,20 @@ export const Nav = styled.nav`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 50px 12px 12px;
+  padding: 40px 25px 25px;
   min-height: 100%;
   height: max-content;
 `
 
 export const NavItem = styled(NavLink)`
-  width: 85%;
+  width: 100%;
+  height: 40px;
   box-sizing: border-box;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 20px;
-  padding: 8px;
+  padding: 8px 10px;
   border-radius: 5px;
   text-decoration: none;
   color: ${({ theme }) => theme.app.palette.black};
@@ -56,6 +57,10 @@ export const NavItem = styled(NavLink)`
   &:hover {
     background-color: ${({ theme }) => theme.app.palette.green1};
     color: ${({ theme }) => theme.app.palette.white};
+
+    svg {
+      color: ${({ theme }) => theme.app.palette.white};
+    }
   }
   &.active {
     ${({ theme }) =>
@@ -70,7 +75,11 @@ export const NavItem = styled(NavLink)`
 export const NavGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
+
+  > div {
+    width: 100%;
+  }
 `
 
 export const Page = styled.div`
