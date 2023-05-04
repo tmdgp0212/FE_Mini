@@ -32,6 +32,7 @@ const palette = {
   black: '#222222',
   white: '#FAFAFA',
   orange: '#E2532D',
+  red: '#E2532D',
 }
 
 const typography = {
