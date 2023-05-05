@@ -51,6 +51,7 @@ const size = {
     base: '16px',
     medium: '20px',
     large: '24px',
+    huge: '30px',
     title: '36px',
   },
 }
