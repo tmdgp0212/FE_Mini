@@ -24,7 +24,7 @@ const slideUp = keyframes`
 export const Container = styled.div<Omit<ToastProps, 'message'>>`
   box-sizing: border-box;
   display: flex;
-  padding: 0.8rem;
+  padding: 1.6rem 4rem;
   border-radius: 8px;
   z-index: 10;
   animation: ${({ position }) => (position === 'top' ? slideDown : slideUp)} 0.3s forwards;
