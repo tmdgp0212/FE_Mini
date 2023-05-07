@@ -5,6 +5,9 @@ import { ButtonProps } from './'
 import { darken } from '@mui/material/styles'
 
 export const Button = styled(MaterialButton)<ButtonProps>`
+  height: 28px;
+  line-height: 28px;
+
   ${(props) =>
     props.bg
       ? css`
