@@ -16,7 +16,7 @@ function ProtectedRouter() {
     profile: 'https://picsum.photos/seed/picsum/200/300',
   })
 
-  return <Layout user={null} />
+  return <Layout user={user} />
 }
 
 export default ProtectedRouter
