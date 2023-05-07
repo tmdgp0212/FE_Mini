@@ -50,7 +50,7 @@ function Layout({ user }: LayoutProps) {
           <MdLogout /> Logout
         </S.NavItem>
       </S.Nav>
-      <S.Page>{user ? <Outlet context={{ user }} /> : <div>로그인 해주세요</div>}</S.Page>
+      <S.Page id="page">{user ? <Outlet context={{ user }} /> : <div>로그인 해주세요</div>}</S.Page>
     </S.Grid>
   )
 }
