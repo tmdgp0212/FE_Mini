@@ -1,6 +1,5 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Admin, Home, NotFound, Signup, User, Logout, UserControl, EditProfile } from '../pages'
-import RequestVacation from '../pages/RequestVacation'
+import { Admin, Home, NotFound, Signup, User, Logout, UserControl, RegisterControl, ScheduleControl } from '../pages'
 import ProtectedRouter from './ProtectedRouter'
 
 function Router() {
@@ -14,8 +13,8 @@ function Router() {
             <Route path="vacation" element={<RequestVacation />} />
           </Route>
           <Route path="/admin" element={<Admin />}>
-            <Route path="vacation" element={<>연차/당직 신청내역보기</>} />
-            <Route path="signup" element={<>회원가입 신청내역보기</>} />
+            <Route path="vacation" element={<ScheduleControl />} />
+            <Route path="signup" element={<RegisterControl />} />
             <Route path="user" element={<UserControl />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
