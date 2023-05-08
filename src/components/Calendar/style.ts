@@ -19,8 +19,18 @@ export const CalendarContainer = styled.div`
       display: none;
     }
   }
-
-  .showmore {
+  .rbc-event-content {
+    /* padding: 2px; */
+  }
+  .rbc-show-more {
     color: ${({ theme }) => theme.app.palette.green1};
+    margin: 2px 4px;
+  }
+  .rbc-date-cell {
+    text-align: center;
+    padding: 4px;
+  }
+  .rbc-off-range-bg {
+    background-color: ${({ theme }) => theme.app.palette.gray2};
   }
 `
