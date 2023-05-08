@@ -43,10 +43,10 @@ const typography = {
 
 const size = {
   header: {
-    height: '80px',
+    height: '65px',
   },
   nav: {
-    width: '280px',
+    width: '260px',
   },
   font: {
     small: '14px',

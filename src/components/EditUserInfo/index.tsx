@@ -117,12 +117,12 @@ function EditUserInfo({ userData }: EditUserProps) {
             </div>
             <form className="selet-role">
               <div>
-                <input type="radio" name="role" id="common" checked={userData && userData.role === 'ADMIN'} />
+                <input type="radio" name="role" id="common" checked={userData && userData.role === 'User'} />
                 <label htmlFor="common">일반</label>
               </div>
               <div>
-                <input type="radio" name="role" id="manager" checked={userData && userData.role === 'STAFF'} />
-                <label htmlFor="manager">관리자</label>
+                <input type="radio" name="role" id="manager" checked={userData && userData.role === 'Admin'} />
+                <label htmlFor="manager">팀장</label>
               </div>
               <Button bg={theme.app.palette.orange} fontColor={theme.app.palette.white}>
                 권한수정
