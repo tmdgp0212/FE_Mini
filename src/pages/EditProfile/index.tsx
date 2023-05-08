@@ -19,9 +19,31 @@ function EditProfile() {
   const { data: user, status } = useQuery(['user', 1], fetchUser)
   const [isShown, setIsShown] = useState(false)
   const [isClicked, setIsClicked] = useState(false)
-  const handleClick = (e) => {
-    setIsShown((current) => !current)
+  const handleClick = () => {
+    setIsShown((prev) => !prev)
     setIsClicked((prev) => !prev)
+  }
+  const [inputs, setInputs] = useState({ name: '', password: '', email: '' })
+  const { name, phone, email, currentPassword, newPassword, checkPassword } = inputs
+  const onChange = (e) => {
+    const { name, value } = e.target
+
+    const nextInputs = {
+      ...inputs,
+      [name]: value,
+    }
+    setInputs(nextInputs)
+  }
+  const onReset = () => {
+    const resetInputs = {
+      name: '',
+      phone: '',
+      email: '',
+      currentPassword: '',
+      newPassword: '',
+      checkPassword: '',
+    }
+    setInputs(resetInputs)
   }
   if (status === 'loading') return <></>
   if (status === 'error') return <>error</>
@@ -76,24 +98,41 @@ function EditProfile() {
             <S.FormContainer>
               <S.Form>
                 <S.InputWrapper>
-                  <label htmlFor="name">이름</label> <S.Input id="name" placeholder="홍길동" />{' '}
+                  <label htmlFor="name">이름</label>{' '}
+                  <S.Input id="name" name="name" placeholder="홍길동" onChange={onChange} value={name} />{' '}
                 </S.InputWrapper>
                 <S.InputWrapper>
-                  <label htmlFor="email">이메일</label> <S.Input id="email" placeholder="abc@console.log" />
+                  <label htmlFor="email">이메일</label>{' '}
+                  <S.Input id="email" name="email" placeholder="abc@console.log" onChange={onChange} value={email} />
                 </S.InputWrapper>
                 <S.InputWrapper>
-                  <label htmlFor="phone">핸드폰번호</label> <S.Input id="phone" placeholder="010-1234-1234" />
+                  <label htmlFor="phone">핸드폰번호</label>{' '}
+                  <S.Input id="phone" name="phone" placeholder="010-1234-1234" onChange={onChange} value={phone} />
                 </S.InputWrapper>
               </S.Form>
               <S.Form>
                 <S.InputWrapper>
                   <label htmlFor="current-password">현재 비밀번호</label>{' '}
-                  <S.Input id="current-password" type="password" />
+                  <S.Input
+                    id="current-password"
+                    name="currentPassword"
+                    type="password"
+                    onChange={onChange}
+                    value={currentPassword}
+                  />
                   <S.Warning>비밀번호가 일치하지 않습니다</S.Warning>
                 </S.InputWrapper>
-                <label htmlFor="new-password">새로운 비밀번호</label> <S.Input id="new-password" type="password" />
+                <label htmlFor="new-password">새로운 비밀번호</label>{' '}
+                <S.Input id="new-password" name="newPassword" type="password" value={newPassword} onChange={onChange} />
                 <S.Warning>비밀번호는 숫자와 영어로 조합된 8~20자리의 문자입니다</S.Warning>
-                <label htmlFor="check-password">비밀번호 확인</label> <S.Input id="check-password" type="password" />
+                <label htmlFor="check-password">비밀번호 확인</label>{' '}
+                <S.Input
+                  id="check-password"
+                  name="checkPassword"
+                  type="password"
+                  value={checkPassword}
+                  onChange={onChange}
+                />
                 <S.Warning>비밀번호가 일치하지 않습니다</S.Warning>
               </S.Form>{' '}
             </S.FormContainer>
@@ -107,7 +146,15 @@ function EditProfile() {
               </S.Detail>
             </S.UserCompanyDetail>
             <S.ButtonWrapper>
-              <Button variant="contained" bg="#069C31" fontColor="#fff" size="large" onClick={handleClick}>
+              <Button
+                variant="contained"
+                bg="#069C31"
+                fontColor="#fff"
+                size="large"
+                onClick={() => {
+                  handleClick(), onReset()
+                }}
+              >
                 변경완료
               </Button>
             </S.ButtonWrapper>

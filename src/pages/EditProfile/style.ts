@@ -38,6 +38,7 @@ export const Authority = styled.div`
   position: absolute;
   right: 5%;
 `
+
 export const Detail = styled.div`
   font-size: ${({ theme }) => theme.app.size.font.base};
 `
