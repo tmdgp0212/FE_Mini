@@ -2,11 +2,18 @@ import { useState } from 'react'
 import UserRegister from '../UserRegister'
 import { testUser } from '../UserScheduleControl'
 import * as S from './style'
+import AcceptButtons from '../AcceptButtons'
 
 function UserRegisterControl() {
+  const AcceptFunc = () => {
+    console.log('회원가입 승인')
+  }
+  const rejectFunc = () => {
+    console.log('회원가입 반려')
+  }
   const [checkItems, setCheckItems] = useState<string[]>([])
 
-  const checkedItemHandler = (id: string, isChecked: Boolean) => {
+  const checkedItemHandler = (id: string, isChecked: boolean) => {
     if (isChecked) {
       setCheckItems([...checkItems, id])
     } else {
@@ -14,7 +21,7 @@ function UserRegisterControl() {
     }
   }
 
-  const onCheckAll = (checked: Boolean) => {
+  const onCheckAll = (checked: boolean) => {
     if (checked) {
       const idArray: string[] = []
       testUser.forEach((item) => idArray.push(item.employeeNumber))
@@ -44,6 +51,13 @@ function UserRegisterControl() {
           />
         ))}
       </S.Container>
+      <AcceptButtons
+        checkItems={checkItems}
+        PositiveMsg="승인"
+        NegativeMsg="거부"
+        acceptFunc={AcceptFunc}
+        rejectFunc={rejectFunc}
+      />
     </>
   )
 }
