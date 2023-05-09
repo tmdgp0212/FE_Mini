@@ -9,17 +9,19 @@ function AcceptButtons({
   NegativeMsg,
   acceptFunc,
   rejectFunc,
+  checkItems,
 }: {
   PositiveMsg: string
   NegativeMsg: string
-  acceptFunc: Function
-  rejectFunc: Function
+  acceptFunc: () => void
+  rejectFunc: () => void
+  checkItems: string[]
 }) {
   const theme = useTheme()
   const [modalMsg, setModalMsg] = useState('')
   const [open, setOpen] = useState(false)
   const handleClose = () => setOpen(false)
-  const handleClick = (e: MouseEvent) => {
+  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
     setModalMsg(e.target.id === 'Accept' ? PositiveMsg : NegativeMsg)
     setOpen(true)
   }
@@ -51,6 +53,7 @@ function AcceptButtons({
         modalMsg={modalMsg}
         acceptFunc={acceptFunc}
         rejectFunc={rejectFunc}
+        checkItems={checkItems}
       />
     </>
   )
