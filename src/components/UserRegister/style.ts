@@ -44,7 +44,7 @@ export const UserDetail = styled.div`
   width: 600px;
   height: 120px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr 1fr;
 
   div {
