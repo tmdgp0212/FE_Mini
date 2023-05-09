@@ -1,20 +1,28 @@
 import { BaseEntity } from './common'
 
-export interface UserEntity extends BaseEntity {
+export interface UserEntity {
   username: string
   birthDate: string
-  deleted: boolean
+  deleted?: boolean
   email: string
   employeeNumber: string
-  department: string
+  departmentName: string
   positionName: string
   name: string
   joiningDay: string
-  years: string
+  years: number
   password?: string
   phoneNumber: string
   fileName?: string
   role: UserRole
+  updatedAt: string
+}
+
+export interface SearchedUser {
+  total: number
+  first: boolean
+  last: boolean
+  content: UserEntity[]
 }
 
 export interface UserPayload {

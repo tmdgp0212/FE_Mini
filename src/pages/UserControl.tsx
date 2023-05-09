@@ -5,7 +5,7 @@ import SearchUser from '../components/SearchUser'
 import SearchedUserTable from '../components/SearchedUserTable'
 import Table from '../components/Table'
 import Title from '../components/Title'
-import { UserEntity } from '../types/user'
+import { SearchedUser, UserEntity, UserRole } from '../types/user'
 import { useMutation } from '@tanstack/react-query'
 import Pagenation from '../components/Pagenation'
 
@@ -16,42 +16,61 @@ interface SearchMutateKey {
   page: number
 }
 
-const dummy = [
-  {
-    id: 2,
-    username: 'tmdgp0212',
-    name: '조승혜',
-    birthDate: '1995-02-12',
-    email: 'tmdgp0212@naver.com',
-    phoneNumber: '010-5390-3029',
-    employeeNumber: '12341234',
-    department: '개발',
-    positionName: '대리',
-    role: 'ADMIN',
-    joiningDay: '2020-01-01',
-    years: '5',
-    createdAt: new Date().getDate(),
-    updatedAt: new Date().getDate(),
-    deleted: false,
-  },
-  {
-    id: 1,
-    username: 'test223',
-    name: '김아무개',
-    birthDate: '1995-02-12',
-    email: 'amu1231@naver.com',
-    phoneNumber: '010-1234-1234',
-    employeeNumber: '94838772',
-    department: '영업',
-    positionName: '사원',
-    joiningDay: '2020-01-01',
-    role: 'STAFF',
-    years: '5',
-    createdAt: new Date().getDate(),
-    updatedAt: new Date().getDate(),
-    deleted: false,
-  },
-]
+const dummy: SearchedUser = {
+  total: 22,
+  first: true,
+  last: false,
+  content: [
+    {
+      username: 'admin1',
+      password: '$2a$10$CCCzhASb8vwUsc2J5n3Equ/q/Owu7bcEdysBXj3U2iMFC9VYpJtG.',
+      role: 'STAFF' as UserRole,
+      fileName: '404.jpg',
+      email: 'test@naver.com',
+      employeeNumber: '20221255',
+      phoneNumber: '010-1234-1234',
+      joiningDay: '2020-01-01',
+      birthDate: '2023-04-26',
+      years: 4,
+      name: '김이이',
+      updatedAt: '2023-05-05T22:27:34.727184',
+      positionName: '과장',
+      departmentName: '개발',
+    },
+    {
+      username: 'admin2',
+      password: '$2a$10$lWspLqjoRBd3S9CBh7PsYukKLrfICNubMFaE1PWerDF1ocDngDXDu',
+      role: 'STAFF' as UserRole,
+      fileName: '404.jpg',
+      email: 'test@naver.com',
+      employeeNumber: '20221277',
+      phoneNumber: '010-1234-1234',
+      joiningDay: '2020-01-01',
+      birthDate: '2023-04-26',
+      years: 4,
+      name: '김독자',
+      updatedAt: '2023-05-08T14:33:26.560266',
+      positionName: '대리',
+      departmentName: '개발',
+    },
+    {
+      username: 'admin23',
+      password: '$2a$10$3mBNOKqUzYSWjtjdxBarcOsz6zjPZ7D.42EQYnqiRRXRzNUkmS1fO',
+      role: 'ADMIN' as UserRole,
+      fileName: '404.jpg',
+      email: 'test@naver.com',
+      employeeNumber: '20221276',
+      phoneNumber: '010-1234-1234',
+      joiningDay: '2020-01-01',
+      birthDate: '2023-04-26',
+      years: 4,
+      name: '김독자',
+      updatedAt: '2023-05-08T14:33:25.705969',
+      positionName: '대리',
+      departmentName: '개발',
+    },
+  ],
+}
 
 function UserControl() {
   const [openModal, setOpenModal] = useState(false)
@@ -65,7 +84,7 @@ function UserControl() {
   const { data: seachedUser, mutate: searchMutate } = useMutation(
     async ({ type, keyword, page }: SearchMutateKey) => {
       const res = await fetch(`/api/v1/member/page/search?text=${type}&keyword=${keyword}&page=${page}&size=10`)
-      // return res.datas
+      return dummy
     },
     {
       onSuccess: (data) => {
@@ -89,23 +108,31 @@ function UserControl() {
     setPage(1)
   }
 
+  const getAllUsers = () => {
+    searchMutate({ type: 'ALL', keyword: '', page: 0 })
+    setNowSearching({ type: 'ALL', keyword: '' })
+    setPage(1)
+  }
+
   const pageChange = (e: React.ChangeEvent<unknown>, value: number) => {
+    if (page === value) return
     setPage(value)
     searchMutate({ type: nowSearching.type, keyword: nowSearching.keyword, page: value - 1 })
   }
 
   return (
     <>
-      <Title text={'사원 관리'} />
+      <Title text={'유저정보 관리'} />
       <SearchUser
         searchType={searchType}
         searchInput={searchInput}
         searchInputChange={searchInputChange}
         searchTypeChange={searchTypeChange}
+        getAllUsers={getAllUsers}
         onSearch={onSearch}
       />
       <Table>
-        <SearchedUserTable users={dummy} ModalHandler={setOpenModal} setUserData={setUserData} />
+        <SearchedUserTable users={seachedUser?.content} ModalHandler={setOpenModal} setUserData={setUserData} />
       </Table>
       <Pagenation page={page} maxLength={maxPageLength} pageChange={pageChange} />
 

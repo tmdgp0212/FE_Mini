@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { UserEntity } from '../../types/user'
+import { UserEntity, UserRole } from '../../types/user'
 import { useTheme } from '@emotion/react'
 import Button from '../Button'
 import * as S from './style'
@@ -37,9 +37,8 @@ function EditUserInfo({ userData }: EditUserProps) {
 
   const RoleChange = (e: React.MouseEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement
-    setRole(target.id)
-    // const userRole: UserRole = UserRole[target.id]
-    // setRole(userRole)
+    const userRole: UserRole = target.id as UserRole
+    setRole(userRole)
   }
 
   const userDataEdit = () => {
@@ -101,7 +100,7 @@ function EditUserInfo({ userData }: EditUserProps) {
           />
 
           <label htmlFor="department">부서</label>
-          <select name="department" id="department" value={input.department}>
+          <select name="department" id="department" value={input.departmentName}>
             <option value="인사">인사</option>
             <option value="영업">영업</option>
             <option value="개발">개발</option>
@@ -117,7 +116,7 @@ function EditUserInfo({ userData }: EditUserProps) {
             <option value="부장">부장</option>
           </select>
         </div>
-        <Button bg={theme.app.palette.green1} fontColor={theme.app.palette.white} onClick={() => userDataEdit()}>
+        <Button bg={theme.app.palette.green1} fontcolor={theme.app.palette.white} onClick={() => userDataEdit()}>
           수정
         </Button>
       </form>
@@ -150,14 +149,26 @@ function EditUserInfo({ userData }: EditUserProps) {
             </div> */}
             <form className="selet-role">
               <div>
-                <input type="radio" name="role" id="ADMIN" checked={role === 'ADMIN'} onClick={(e) => RoleChange(e)} />
-                <label htmlFor="ADMIN">일반</label>
+                <input
+                  type="radio"
+                  name="role"
+                  id="STAFF"
+                  checked={role === UserRole['STAFF']}
+                  onClick={(e) => RoleChange(e)}
+                />
+                <label htmlFor="STAFF">일반</label>
               </div>
               <div>
-                <input type="radio" name="role" id="STAFF" checked={role === 'STAFF'} onClick={(e) => RoleChange(e)} />
-                <label htmlFor="STAFF">팀장</label>
+                <input
+                  type="radio"
+                  name="role"
+                  id="ADMIN"
+                  checked={role === UserRole['ADMIN']}
+                  onClick={(e) => RoleChange(e)}
+                />
+                <label htmlFor="ADMIN">팀장</label>
               </div>
-              <Button bg={theme.app.palette.orange} fontColor={theme.app.palette.white} onClick={() => userRoleEdit()}>
+              <Button bg={theme.app.palette.orange} fontcolor={theme.app.palette.white} onClick={() => userRoleEdit()}>
                 권한수정
               </Button>
             </form>

@@ -1,10 +1,11 @@
+import { SetStateAction } from 'react'
 import { UserEntity } from '../../types/user'
 import * as S from './style'
 
 interface SearchedUserProps {
-  users: UserEntity[]
+  users?: UserEntity[]
   ModalHandler: React.Dispatch<React.SetStateAction<boolean>>
-  setUserData: React.Dispatch<React.SetStateAction<UserEntity>>
+  setUserData: React.Dispatch<SetStateAction<UserEntity | undefined>>
 }
 
 function SearchedUserTable({ users, ModalHandler, setUserData }: SearchedUserProps) {
@@ -33,18 +34,26 @@ function SearchedUserTable({ users, ModalHandler, setUserData }: SearchedUserPro
         </tr>
       </S.Thead>
       <S.Tbody>
-        {users.map((user) => (
-          <tr key={user.id}>
-            <td className="name">{user.name}</td>
-            <td className="employeeNumber">{user.employeeNumber}</td>
-            <td className="department">{user.department}</td>
-            <td className="position">{user.positionName}</td>
-            <td className="role">{user.role}</td>
-            <td className="edit-btn" onClick={() => openModal(user)}>
-              수정
+        {users ? (
+          users.map((user) => (
+            <tr key={user.username}>
+              <td className="name">{user.name}</td>
+              <td className="employeeNumber">{user.employeeNumber}</td>
+              <td className="department">{user.departmentName}</td>
+              <td className="position">{user.positionName}</td>
+              <td className="role">{user.role}</td>
+              <td className="edit-btn" onClick={() => openModal(user)}>
+                수정
+              </td>
+            </tr>
+          ))
+        ) : (
+          <tr>
+            <td colSpan={6} className="message">
+              유저를 검색해주세요.
             </td>
           </tr>
-        ))}
+        )}
       </S.Tbody>
     </>
   )

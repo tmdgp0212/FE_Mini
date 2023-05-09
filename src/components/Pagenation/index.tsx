@@ -11,7 +11,7 @@ interface PagenationProps {
 function Pagenation({ page, maxLength = 1, pageChange }: PagenationProps) {
   return (
     <S.PagenationContainer>
-      <Pagination count={maxLength} onChange={pageChange} page={page && page} />
+      <Pagination count={maxLength} onChange={pageChange} page={page} />
     </S.PagenationContainer>
   )
 }

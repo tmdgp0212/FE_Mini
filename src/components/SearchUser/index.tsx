@@ -9,10 +9,18 @@ interface SearchUserProps {
   searchInput: string
   searchInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   searchTypeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  getAllUsers: () => void
   onSearch: () => void
 }
 
-function SearchUser({ searchType, searchInput, searchInputChange, searchTypeChange, onSearch }: SearchUserProps) {
+function SearchUser({
+  searchType,
+  searchInput,
+  searchInputChange,
+  searchTypeChange,
+  getAllUsers,
+  onSearch,
+}: SearchUserProps) {
   const theme = useTheme()
   return (
     <S.SearchForm>
@@ -27,8 +35,11 @@ function SearchUser({ searchType, searchInput, searchInputChange, searchTypeChan
       </S.SearchType>
 
       <input type="text" value={searchInput} onChange={searchInputChange} />
-      <Button bg={theme.app.palette.green1} fontColor={theme.app.palette.white} onClick={onSearch}>
+      <Button bg={theme.app.palette.green1} fontcolor={theme.app.palette.white} onClick={onSearch}>
         검색
+      </Button>
+      <Button bg={theme.app.palette.orange} fontcolor={theme.app.palette.white} onClick={getAllUsers}>
+        전체조회
       </Button>
     </S.SearchForm>
   )

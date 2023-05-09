@@ -105,7 +105,7 @@ export const EditUserContainer = styled.div`
       justify-content: center;
       position: relative;
       gap: 150px;
-      padding: 20px 0 0 0px;
+      padding: 20px 80px 0 0;
 
       div {
         display: flex;

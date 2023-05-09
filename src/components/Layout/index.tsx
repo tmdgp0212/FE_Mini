@@ -35,15 +35,15 @@ function Layout({ user }: LayoutProps) {
               { title: '내 연차/당직 관리', to: '/user/vacation' },
             ]}
           />
-          {user?.role === UserRole.Admin ? (
+          {user?.role === UserRole.ADMIN ? (
             <>
               <NestedNav
                 mainTitle="admin"
                 mainIcon={<GrUserAdmin />}
                 menuInfoList={[
-                  { title: '연차/당직 신청내역보기', to: '/admin/vacation' },
-                  { title: '회원가입 신청내역보기', to: '/admin/signup' },
-                  { title: '유저 정보 수정', to: '/admin/user' },
+                  { title: '연차/당직 신청내역', to: '/admin/vacation' },
+                  { title: '회원가입 신청내역', to: '/admin/signup' },
+                  { title: '유저정보 관리', to: '/admin/user' },
                 ]}
               />
             </>

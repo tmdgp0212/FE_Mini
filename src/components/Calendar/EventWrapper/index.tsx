@@ -1,14 +1,20 @@
-import React from 'react'
-import { EventWrapperProps } from 'react-big-calendar'
+import { Event } from 'react-big-calendar'
+import * as S from './style'
 
-interface CostomEventWrapperProps {
-  event: EventWrapperProps
-  children: React.ReactElement
+interface CostomEvent extends Event {
+  type: string
 }
 
-function EventWrapper({ children, event }: CostomEventWrapperProps) {
-  console.log(event)
-  return <div onClick={() => console.log('dd')}>{children}</div>
+interface CostomEventWrapperProps {
+  event: CostomEvent
+}
+
+function EventWrapper({ event }: CostomEventWrapperProps) {
+  return (
+    <S.EventWrapper className={event.type} onClick={() => console.log('dd')}>
+      {event.title}
+    </S.EventWrapper>
+  )
 }
 
 export default EventWrapper

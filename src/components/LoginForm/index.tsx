@@ -20,7 +20,7 @@ function LoginForm() {
     <form style={{ display: 'flex' }} onSubmit={handleSubmit(onSubmit, onInvalid)}>
       <TextField variant="outlined" {...register('username', { required: 'username is required' })} />
       <TextField type="password" variant="outlined" {...register('password', { required: 'password is required' })} />
-      <Button type="submit" variant="contained" bg={theme.app.palette.green1} fontColor={theme.app.palette.white}>
+      <Button type="submit" variant="contained" bg={theme.app.palette.green1} fontcolor={theme.app.palette.white}>
         Login
       </Button>
     </form>

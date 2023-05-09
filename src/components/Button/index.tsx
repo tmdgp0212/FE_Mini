@@ -3,12 +3,12 @@ import * as S from './style'
 
 export interface ButtonProps extends MaterialButtonProps {
   bg?: string
-  fontColor?: string
+  fontcolor?: string
 }
 
-function Button({ bg, fontColor, children, ...props }: ButtonProps) {
+function Button({ bg, fontcolor, children, ...props }: ButtonProps) {
   return (
-    <S.Button bg={bg} fontColor={fontColor} {...props}>
+    <S.Button bg={bg} fontcolor={fontcolor} {...props}>
       {children}
     </S.Button>
   )

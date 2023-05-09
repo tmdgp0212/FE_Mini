@@ -8,14 +8,6 @@ export const PagenationContainer = styled.div`
   .Mui-selected {
     background-color: ${({ theme }) => theme.app.palette.green1};
     color: #fff;
-
-    &:hover {
-      background-color: green;
-    }
-  }
-
-  .MuiPaginationItem-root:hover {
-    background-color: ${({ theme }) => theme.app.palette.green3};
   }
 
   .Mui-selected:hover {
