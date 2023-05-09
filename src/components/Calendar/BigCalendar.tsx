@@ -78,12 +78,12 @@ function BigCalendar() {
     },
   )
 
-  const onNavigate = (action: NavigateAction, date: Date | undefined) => {
+  const onNavigate = async (date: Date) => {
     if (date) {
       const originDate = new Date(date)
       const formattedDate = dayjs(originDate).format('YYYY-MM-DD')
-      vacationMutate(formattedDate)
-      dutyMutate(formattedDate)
+
+      await Promise.all([vacationMutate(formattedDate), dutyMutate(formattedDate)])
     }
   }
 
@@ -110,9 +110,10 @@ function BigCalendar() {
         endAccessor="end"
         style={{ height: 600 }}
         components={{
-          toolbar: (props) => <Toolbar {...props} onNavigate={onNavigate} />,
+          toolbar: (props) => <Toolbar {...props} />,
           eventWrapper: EventWrapper,
         }}
+        onNavigate={onNavigate}
       />
     </S.CalendarContainer>
   )
