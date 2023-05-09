@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import UserSchedule from '../UserSchedule'
 import * as S from './style'
+import AcceptButtons from '../AcceptButtons'
+import Table from '../Table'
 
 export const testUser = [
   {
@@ -51,9 +53,15 @@ export const testUser = [
 ]
 
 function UserScheduleControl() {
+  const AcceptFunc = () => {
+    console.log('연차/당직 승인')
+  }
+  const rejectFunc = () => {
+    console.log('연차/당직 반려')
+  }
   const [checkItems, setCheckItems] = useState<string[]>([])
 
-  const checkedItemHandler = (id: string, isChecked: Boolean) => {
+  const checkedItemHandler = (id: string, isChecked: boolean) => {
     if (isChecked) {
       setCheckItems([...checkItems, id])
     } else {
@@ -61,7 +69,7 @@ function UserScheduleControl() {
     }
   }
 
-  const onCheckAll = (checked: Boolean) => {
+  const onCheckAll = (checked: boolean) => {
     if (checked) {
       const idArray: string[] = []
       testUser.forEach((item) => idArray.push(item.employeeNumber))
@@ -73,33 +81,42 @@ function UserScheduleControl() {
 
   return (
     <>
-      <S.Thead>
-        <tr>
-          <th>
-            <input
-              type="checkbox"
-              name="select-all"
-              onChange={(e) => onCheckAll(e.target.checked)}
-              checked={checkItems.length === testUser.length ? true : false}
+      <Table>
+        <S.Thead>
+          <tr>
+            <th>
+              <input
+                type="checkbox"
+                name="select-all"
+                onChange={(e) => onCheckAll(e.target.checked)}
+                checked={checkItems.length === testUser.length ? true : false}
+              />
+            </th>
+            <th>이름</th>
+            <th>사번</th>
+            <th>부서</th>
+            <th>직급</th>
+            <th>신청 날짜</th>
+          </tr>
+        </S.Thead>
+        <S.Tbody>
+          {testUser.map((user) => (
+            <UserSchedule
+              key={user.employeeNumber}
+              user={user}
+              checkItems={checkItems}
+              checkItemHandler={checkedItemHandler}
             />
-          </th>
-          <th>이름</th>
-          <th>사번</th>
-          <th>부서</th>
-          <th>직급</th>
-          <th>신청 날짜</th>
-        </tr>
-      </S.Thead>
-      <S.Tbody>
-        {testUser.map((user) => (
-          <UserSchedule
-            key={user.employeeNumber}
-            user={user}
-            checkItems={checkItems}
-            checkItemHandler={checkedItemHandler}
-          />
-        ))}
-      </S.Tbody>
+          ))}
+        </S.Tbody>
+      </Table>
+      <AcceptButtons
+        checkItems={checkItems}
+        PositiveMsg="승인"
+        NegativeMsg="거부"
+        acceptFunc={AcceptFunc}
+        rejectFunc={rejectFunc}
+      />
     </>
   )
 }
