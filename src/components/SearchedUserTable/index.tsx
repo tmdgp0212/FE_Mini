@@ -21,7 +21,6 @@ function SearchedUserTable({ users, ModalHandler, setUserData }: SearchedUserPro
         <col width="13%" />
         <col width="13%" />
         <col width="13%" />
-        <col width="13%" />
       </colgroup>
       <S.Thead>
         <tr>
@@ -29,7 +28,6 @@ function SearchedUserTable({ users, ModalHandler, setUserData }: SearchedUserPro
           <th className="employeeNumber">사번</th>
           <th className="department">부서</th>
           <th className="position">직급</th>
-          <th className="years">연차</th>
           <th className="role">권한</th>
           <th className="edit">수정</th>
         </tr>
@@ -40,8 +38,7 @@ function SearchedUserTable({ users, ModalHandler, setUserData }: SearchedUserPro
             <td className="name">{user.name}</td>
             <td className="employeeNumber">{user.employeeNumber}</td>
             <td className="department">{user.department}</td>
-            <td className="position">{user.position}</td>
-            <td className="years">{user.years}</td>
+            <td className="position">{user.positionName}</td>
             <td className="role">{user.role}</td>
             <td className="edit-btn" onClick={() => openModal(user)}>
               수정

@@ -3,19 +3,52 @@ import { UserEntity } from '../../types/user'
 import { useTheme } from '@emotion/react'
 import Button from '../Button'
 import * as S from './style'
+import { useMutation } from '@tanstack/react-query'
 
 interface EditUserProps {
   userData: UserEntity | undefined
+}
+
+interface RoleMutateKey {
+  username: string
+  role: string
 }
 
 function EditUserInfo({ userData }: EditUserProps) {
   const theme = useTheme()
   const [input, setInput] = useState({ ...userData })
   const [editRoleOpen, setEditRoleOpen] = useState(false)
+  const [role, setRole] = useState(userData?.role)
+
+  const { mutate: infoEditMutate } = useMutation(async () => {
+    const res = await fetch('api가 없음...수정요청ㅜㅜ')
+    return res
+  })
+
+  const { mutate: roleEditMutate } = useMutation(async (data: RoleMutateKey) => {
+    // const res = await fetch('/api/v1/member/admin/role/modify', data)
+    // return res
+  })
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     console.log(input)
     setInput({ ...input, [e.target.name]: e.target.value })
+  }
+
+  const RoleChange = (e: React.MouseEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement
+    setRole(target.id)
+    // const userRole: UserRole = UserRole[target.id]
+    // setRole(userRole)
+  }
+
+  const userDataEdit = () => {
+    infoEditMutate() // 요청데이터 명세서 정리필요
+  }
+  const userRoleEdit = () => {
+    if (role && userData) {
+      roleEditMutate({ username: userData?.username, role: role })
+    }
   }
 
   return (
@@ -57,14 +90,14 @@ function EditUserInfo({ userData }: EditUserProps) {
             placeholder="사번을 입력해주세요"
           />
 
-          <label htmlFor="years">입사연차</label>
+          <label htmlFor="joiningDay">입사</label>
           <input
-            value={input.years}
+            value={input.joiningDay}
             onChange={onChange}
-            id="years"
-            name="years"
-            type="text"
-            placeholder="입사연차를 입력해주세요"
+            id="joiningDay"
+            name="joiningDay"
+            type="date"
+            placeholder="입사일을 입력해주세요"
           />
 
           <label htmlFor="department">부서</label>
@@ -75,8 +108,8 @@ function EditUserInfo({ userData }: EditUserProps) {
             <option value="마케팅">마케팅</option>
           </select>
 
-          <label htmlFor="position">직급</label>
-          <select name="department" id="department" value={input.position}>
+          <label htmlFor="positionName">직급</label>
+          <select name="department" id="department" value={input.positionName}>
             <option value="사원">사원</option>
             <option value="대리">대리</option>
             <option value="과장">과장</option>
@@ -84,7 +117,7 @@ function EditUserInfo({ userData }: EditUserProps) {
             <option value="부장">부장</option>
           </select>
         </div>
-        <Button bg={theme.app.palette.green1} fontColor={theme.app.palette.white}>
+        <Button bg={theme.app.palette.green1} fontColor={theme.app.palette.white} onClick={() => userDataEdit()}>
           수정
         </Button>
       </form>
@@ -99,7 +132,7 @@ function EditUserInfo({ userData }: EditUserProps) {
         </div>
         {editRoleOpen && (
           <>
-            <div className="now-role">
+            {/* <div className="now-role">
               <table>
                 <tr>
                   <th>영업팀장</th>
@@ -114,17 +147,17 @@ function EditUserInfo({ userData }: EditUserProps) {
                   <td>정석화</td>
                 </tr>
               </table>
-            </div>
+            </div> */}
             <form className="selet-role">
               <div>
-                <input type="radio" name="role" id="common" checked={userData && userData.role === 'User'} />
-                <label htmlFor="common">일반</label>
+                <input type="radio" name="role" id="ADMIN" checked={role === 'ADMIN'} onClick={(e) => RoleChange(e)} />
+                <label htmlFor="ADMIN">일반</label>
               </div>
               <div>
-                <input type="radio" name="role" id="manager" checked={userData && userData.role === 'Admin'} />
-                <label htmlFor="manager">팀장</label>
+                <input type="radio" name="role" id="STAFF" checked={role === 'STAFF'} onClick={(e) => RoleChange(e)} />
+                <label htmlFor="STAFF">팀장</label>
               </div>
-              <Button bg={theme.app.palette.orange} fontColor={theme.app.palette.white}>
+              <Button bg={theme.app.palette.orange} fontColor={theme.app.palette.white} onClick={() => userRoleEdit()}>
                 권한수정
               </Button>
             </form>

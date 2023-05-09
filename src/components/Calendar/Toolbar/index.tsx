@@ -4,35 +4,35 @@ import * as S from './style'
 type ViewType = 'month' | 'week'
 
 const Toolbar = (props: ToolbarProps) => {
-  const { date, view } = props
+  const { date, view, onNavigate, onView } = props
 
   const navigate = (action: NavigateAction) => {
-    props.onNavigate(action)
+    onNavigate(action)
   }
 
   const changeView = (viewName: ViewType) => {
-    props.onView(viewName)
+    onView(viewName)
   }
 
   return (
     <S.Toolbar className="rbc-toolbar">
-      <span className="rbc-btn-group">
-        <button type="button" onClick={navigate.bind(null, 'TODAY')}>
-          now
-        </button>
-        <button type="button" onClick={navigate.bind(null, 'PREV')}>
-          prev
-        </button>
-        <button type="button" onClick={navigate.bind(null, 'NEXT')}>
-          next
-        </button>
-      </span>
-      <span className="rbc-toolbar-label">{`${new Date(date).getFullYear()}년 ${
-        new Date(date).getMonth() + 1
-      }월`}</span>
       <div className="guide">
         <span className="duty">당직</span>
         <span className="vacation">연차</span>
+      </div>
+      <div className="center">
+        <button className="arrow" type="button" onClick={navigate.bind(null, 'PREV')}>
+          ◀
+        </button>
+        <span className="rbc-toolbar-label">{`${new Date(date).getFullYear()}년 ${
+          new Date(date).getMonth() + 1
+        }월`}</span>
+        <button className="arrow" type="button" onClick={navigate.bind(null, 'NEXT')}>
+          ▶
+        </button>
+        <button className="today" type="button" onClick={navigate.bind(null, 'TODAY')}>
+          today
+        </button>
       </div>
       <div className="rbc-btn-group">
         <button

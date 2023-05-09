@@ -7,8 +7,9 @@ export interface UserEntity extends BaseEntity {
   email: string
   employeeNumber: string
   department: string
-  position: string
+  positionName: string
   name: string
+  joiningDay: string
   years: string
   password?: string
   phoneNumber: string
@@ -24,7 +25,7 @@ export interface UserPayload {
   department: string
 }
 
-export enum UserRole {
-  'User' = 'User',
-  'Admin' = 'Admin',
+export const enum UserRole {
+  'ADMIN' = 'ADMIN',
+  'STAFF' = 'STAFF',
 }

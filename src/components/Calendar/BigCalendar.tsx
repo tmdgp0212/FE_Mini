@@ -1,10 +1,13 @@
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { Calendar, dayjsLocalizer, Event as OriginEvent } from 'react-big-calendar'
+import { Calendar, dayjsLocalizer, NavigateAction, Event as OriginEvent } from 'react-big-calendar'
 import { createCalendarEvent, dayjsInstance } from '../../util'
-import * as S from './style'
 import { useTheme } from '@mui/material'
+import { useMutation } from '@tanstack/react-query'
+import { useEffect } from 'react'
 import Toolbar from './Toolbar'
 import EventWrapper from './EventWrapper'
+import * as S from './style'
+import dayjs from 'dayjs'
 
 interface Event extends OriginEvent {
   type: string
@@ -22,6 +25,26 @@ function BigCalendar() {
 
   const theme = useTheme()
   const localizer = dayjsLocalizer(dayjsInstance)
+
+  const { data: duty, mutate: dutyMutate } = useMutation(async (date: string) => {
+    //date담아보내기
+    const res = await fetch('/api/v1/duty/list')
+    return res
+  })
+  const { data: vacation, mutate: vacationMutate } = useMutation(async (date: string) => {
+    //date담아보내기
+    const res = await fetch('/api/v1/vacation/list')
+    return res
+  })
+
+  const onNavigate = (action: NavigateAction, date: Date | undefined) => {
+    if (date) {
+      const originDate = new Date(date)
+      const formattedDate = dayjs(originDate).format('YYYY-MM-DD')
+      vacationMutate(formattedDate)
+      dutyMutate(formattedDate)
+    }
+  }
 
   const eventPropGetter = (event: Event) => {
     const defaultStyle = {
@@ -49,12 +72,17 @@ function BigCalendar() {
     }
   }
 
+  useEffect(() => {
+    const formattedDate = dayjs(new Date()).format('YYYY-MM-DD')
+    vacationMutate(formattedDate)
+    dutyMutate(formattedDate)
+  }, [])
+
   return (
     <S.CalendarContainer>
       <Calendar
         localizer={localizer}
         events={events}
-        defaultDate={'2023-05-24'}
         defaultView="month"
         culture={'ko'}
         views={{
@@ -68,7 +96,7 @@ function BigCalendar() {
         style={{ height: 600 }}
         eventPropGetter={(event) => eventPropGetter(event as Event)}
         components={{
-          toolbar: Toolbar,
+          toolbar: (props) => <Toolbar {...props} onNavigate={onNavigate} />,
           // eventWrapper: EventWrapper,
         }}
       />

@@ -1,11 +1,34 @@
 import styled from '@emotion/styled'
 
 export const Toolbar = styled.div`
-  .rbc-toolbar-label {
-    margin-bottom: 5px;
-    font-size: ${({ theme }) => theme.app.size.font.large};
-    font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+
+  .center {
+    display: flex;
+    align-items: center;
+
+    .arrow {
+      border: none;
+      width: 20px;
+      height: 20px;
+      line-height: 1;
+      padding: 0;
+    }
+
+    .today {
+      width: fit-content;
+      margin: 0 20px;
+      padding: 3px 10px;
+    }
+
+    .rbc-toolbar-label {
+      font-size: ${({ theme }) => theme.app.size.font.large};
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
   }
+
   .rbc-btn-group {
     button {
       font-size: 12px;

@@ -35,6 +35,6 @@ export const SearchType = styled.div`
   }
 
   select {
-    width: 80px;
+    width: 100px;
   }
 `
