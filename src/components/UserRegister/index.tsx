@@ -18,7 +18,7 @@ function UserRegister({
 }: {
   user: RegisterUser
   checkItems: string[]
-  checkItemHandler: Function
+  checkItemHandler: () => void
 }) {
   const [isClicked, setIsClicked] = useState(false)
 
@@ -49,10 +49,17 @@ function UserRegister({
         <div className="employeeNum">사번 : {user.employeeNumber}</div>
         <div className="department">부서 : {user.department}</div>
         <div className="position">직급 : {user.position}</div>
-        <div className="joinDate">입사일(근속연수): {user.joinDate}</div>
+        <div className="joinDate">
+          입사일(근속연수): {user.joinDate} ({getYearsOfService(user.joinDate)}년)
+        </div>
       </S.UserDetail>
     </S.Container>
   )
 }
 
 export default UserRegister
+
+const getYearsOfService = (date: string) => {
+  const now = new Date()
+  return now.getFullYear() - Number(date.substring(0, 4)) + 1
+}
