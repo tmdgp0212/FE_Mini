@@ -1,5 +1,17 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Admin, Home, NotFound, Signup, User, Logout, UserControl, RegisterControl, ScheduleControl } from '../pages'
+import {
+  Admin,
+  Home,
+  NotFound,
+  Signup,
+  User,
+  Logout,
+  UserControl,
+  RegisterControl,
+  ScheduleControl,
+  EditProfile,
+} from '../pages'
+import RequestVacation from '../pages/RequestVacation'
 import ProtectedRouter from './ProtectedRouter'
 
 function Router() {

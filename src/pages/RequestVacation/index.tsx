@@ -1,10 +1,14 @@
 import React from 'react'
 import Table from '../../components/Table'
 import Title from '../../components/Title'
+import SelectedType from '../../components/SelectedType'
+import SelectedDate from '../../components/SelectedDate'
+
 function RequestVacation() {
   return (
     <>
       <Title text="연차/당직 신청" />
+      <SelectedDate />
       <Title text="내 연차/당직 보기" />
       <Table>
         <thead>
@@ -39,5 +43,4 @@ function RequestVacation() {
     </>
   )
 }
-
 export default RequestVacation
