@@ -11,21 +11,32 @@ export const getDuty = async () => {
 }
 
 export const acceptVacation = async (id: string) => {
-  const res = await instance.post(`/vacation/ok/${id}`)
-  return res.data
+  console.log(`Accept Vacation`)
+  // const res = await instance.post(`/vacation/ok/${id}`)
+  // return res.data
 }
 
 export const rejectVacation = async (id: string) => {
-  const res = await instance.post(`/vacation/rejected/${id}`)
-  return res.data
+  console.log(`Reject Vacation`)
+  // const res = await instance.post(`/vacation/rejected/${id}`)
+  // return res.data
 }
 
 export const acceptDuty = async (id: string) => {
-  const res = await instance.post(`/duty/ok/${id}`)
-  return res.data
+  console.log(`Accept Duty`)
+  // const res = await instance.post(`/duty/ok/${id}`)
+  // return res.data
 }
 
 export const rejectDuty = async (id: string) => {
-  const res = await instance.post(`/duty/rejected/${id}`)
-  return res.data
+  console.log(`Reject Duty`)
+  // const res = await instance.post(`/duty/rejected/${id}`)
+  // return res.data
+}
+
+export const acceptSignUp = async () => {
+  console.log(`Accept`)
+}
+export const rejectSignUp = async () => {
+  console.log(`Reject`)
 }
