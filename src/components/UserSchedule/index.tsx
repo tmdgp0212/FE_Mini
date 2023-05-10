@@ -16,7 +16,7 @@ function UserSchedule({
 }: {
   user: VacationUser
   checkItems: string[]
-  checkItemHandler: () => void
+  checkItemHandler: (id: string, checked: boolean) => void
   type: string
 }) {
   const [isClicked, setIsClicked] = useState(false)
