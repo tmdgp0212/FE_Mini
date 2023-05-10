@@ -66,18 +66,17 @@ export const ButtonWrapper = styled.div`
 
 export const FormContainer = styled.div`
   display: flex;
-  height: 180px;
-  margin: 20px 0;
+  height: 250px;
+  width: 100%;
+  margin: 10px 0 0;
 `
 
 export const InputWrapper = styled.div`
-  height: 100px;
+  height: 80px;
+  width: 150px;
   display: flex;
   flex-direction: column;
-`
-export const Warning = styled.div`
-  color: red;
-  font-size: 10px;
+  margin: 5px;
 `
 
 export const Notice = styled.div`
@@ -86,22 +85,6 @@ export const Notice = styled.div`
   height: 40px;
 `
 
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-`
-
-export const Input = styled.input`
-  height: 28px;
-  width: 170px;
-  border-radius: 3px;
-  margin: 2px 0;
-  border: 1px solid ${({ theme }) => theme.app.palette.gray1};
-  &:hover {
-    outline: none;
-  }
-  &:focus {
-    outline: none;
-  }
+export const Form = styled.div`
+  height: 200px;
 `
