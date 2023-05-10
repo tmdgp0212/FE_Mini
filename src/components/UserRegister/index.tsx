@@ -32,36 +32,33 @@ function UserRegister({
   }, [checkItems])
 
   const handleClick = (e: React.MouseEvent) => {
-    const El = e.currentTarget
-    if (!El) {
-      El.querySelector('input').click()
-    }
-
-    return (
-      <S.Container onClick={handleClick}>
-        <input
-          type="checkbox"
-          name={`select-${user.employeeNumber}`}
-          checked={isClicked}
-          value={user.employeeNumber}
-          onChange={(e) => onCheck(e)}
-        />
-        <img src={IconHuman} alt="사용자" />
-        <S.UserInfo>
-          <div className="userName">{user.name}</div>
-          <div className="userEmail">{user.email}</div>
-        </S.UserInfo>
-        <S.UserDetail>
-          <div className="employeeNum">사번 : {user.employeeNumber}</div>
-          <div className="department">부서 : {user.department}</div>
-          <div className="position">직급 : {user.position}</div>
-          <div className="joinDate">
-            입사일(근속연수): {user.joinDate} ({getYearsOfService(user.joinDate)}년)
-          </div>
-        </S.UserDetail>
-      </S.Container>
-    )
+    const El = e.currentTarget as HTMLDivElement
+    El?.querySelector('input').click()
   }
+  return (
+    <S.Container onClick={handleClick}>
+      <input
+        type="checkbox"
+        name={`select-${user.employeeNumber}`}
+        checked={isClicked}
+        value={user.employeeNumber}
+        onChange={(e) => onCheck(e)}
+      />
+      <img src={IconHuman} alt="사용자" />
+      <S.UserInfo>
+        <div className="userName">{user.name}</div>
+        <div className="userEmail">{user.email}</div>
+      </S.UserInfo>
+      <S.UserDetail>
+        <div className="employeeNum">사번 : {user.employeeNumber}</div>
+        <div className="department">부서 : {user.department}</div>
+        <div className="position">직급 : {user.position}</div>
+        <div className="joinDate">
+          입사일(근속연수): {user.joinDate} ({getYearsOfService(user.joinDate)}년)
+        </div>
+      </S.UserDetail>
+    </S.Container>
+  )
 }
 
 export default UserRegister
