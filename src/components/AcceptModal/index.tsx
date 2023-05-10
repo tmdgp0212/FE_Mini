@@ -17,8 +17,8 @@ export default function AcceptModal({
   open: boolean
   handleClose: () => void
   modalMsg: string
-  acceptFunc: () => void
-  rejectFunc: () => void
+  acceptFunc: (id?: string) => void
+  rejectFunc: (id?: string) => void
   checkItems: string[]
 }) {
   const { showToast } = useToast('승인 완료')
