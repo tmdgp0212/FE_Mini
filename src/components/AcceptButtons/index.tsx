@@ -2,7 +2,8 @@ import * as S from './style'
 import { useTheme } from '@mui/material'
 import Button from '../Button'
 import AcceptModal from '../AcceptModal'
-import { useState } from 'react'
+import React, { BaseSyntheticEvent, useState } from 'react'
+import { useToast } from '../../hooks'
 
 function AcceptButtons({
   PositiveMsg,
@@ -17,13 +18,20 @@ function AcceptButtons({
   rejectFunc: () => void
   checkItems: string[]
 }) {
+  const { showToast } = useToast('선택된 아이템이 없습니다', { position: 'bottom' })
   const theme = useTheme()
   const [modalMsg, setModalMsg] = useState('')
   const [open, setOpen] = useState(false)
+
   const handleClose = () => setOpen(false)
-  const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-    setModalMsg(e.target.id === 'Accept' ? PositiveMsg : NegativeMsg)
-    setOpen(true)
+  const handleClick = (e: React.MouseEvent) => {
+    const target = e.target as HTMLButtonElement
+    if (checkItems.length === 0) {
+      showToast()
+    } else {
+      setModalMsg(target.id === 'Accept' ? PositiveMsg : NegativeMsg)
+      setOpen(true)
+    }
   }
   return (
     <>

@@ -32,15 +32,24 @@ function UserRegisterControl() {
   }
   return (
     <>
-      <S.Label>
-        <input
-          type="checkbox"
-          name="select-all"
-          onChange={(e) => onCheckAll(e.target.checked)}
-          checked={checkItems.length === testUser.length ? true : false}
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <S.Label>
+          <input
+            type="checkbox"
+            name="select-all"
+            onChange={(e) => onCheckAll(e.target.checked)}
+            checked={checkItems.length === testUser.length ? true : false}
+          />
+          전체 선택
+        </S.Label>
+        <AcceptButtons
+          checkItems={checkItems}
+          PositiveMsg="승인"
+          NegativeMsg="거부"
+          acceptFunc={AcceptFunc}
+          rejectFunc={rejectFunc}
         />
-        전체 선택
-      </S.Label>
+      </div>
       <S.Container>
         {testUser.map((user) => (
           <UserRegister
@@ -51,13 +60,6 @@ function UserRegisterControl() {
           />
         ))}
       </S.Container>
-      <AcceptButtons
-        checkItems={checkItems}
-        PositiveMsg="승인"
-        NegativeMsg="거부"
-        acceptFunc={AcceptFunc}
-        rejectFunc={rejectFunc}
-      />
     </>
   )
 }

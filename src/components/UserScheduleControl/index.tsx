@@ -3,6 +3,8 @@ import UserSchedule from '../UserSchedule'
 import * as S from './style'
 import AcceptButtons from '../AcceptButtons'
 import Table from '../Table'
+import SelectedType from '../SelectedType'
+import { useGetDuty } from '../../hooks/useGetDuty'
 
 export const testUser = [
   {
@@ -59,6 +61,8 @@ function UserScheduleControl() {
   const rejectFunc = () => {
     console.log('연차/당직 반려')
   }
+  // const { duty } = useGetDuty()
+  const [type, setType] = useState('')
   const [checkItems, setCheckItems] = useState<string[]>([])
 
   const checkedItemHandler = (id: string, isChecked: boolean) => {
@@ -81,6 +85,7 @@ function UserScheduleControl() {
 
   return (
     <>
+      <SelectedType setType={setType} />
       <Table>
         <S.Thead>
           <tr>
@@ -96,13 +101,15 @@ function UserScheduleControl() {
             <th>사번</th>
             <th>부서</th>
             <th>직급</th>
-            <th>신청 날짜</th>
+            <th>{type === 'vacation' ? '시작일' : '신청 날짜'}</th>
+            {type === 'vacation' ? <th>종료일</th> : null}
           </tr>
         </S.Thead>
         <S.Tbody>
           {testUser.map((user) => (
             <UserSchedule
               key={user.employeeNumber}
+              type={type}
               user={user}
               checkItems={checkItems}
               checkItemHandler={checkedItemHandler}

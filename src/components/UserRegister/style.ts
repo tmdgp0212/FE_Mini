@@ -12,9 +12,10 @@ export const Container = styled.div`
   justify-content: space-evenly;
   gap: 30px;
   padding: 20px;
+  cursor: pointer;
 
   input {
-    width: 20px;
+    width: 25px;
   }
   img {
     width: 120px;
