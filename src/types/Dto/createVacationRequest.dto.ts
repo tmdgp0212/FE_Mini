@@ -1,4 +1,4 @@
-import { VacationTempEntity } from '../vacation'
+import { VacationEntity } from '../vacation'
 
 export interface CreateVacationRequestDto
-  extends Pick<VacationTempEntity, 'username' | 'start' | 'end' | 'deleted' | 'status'> {}
+  extends Pick<VacationEntity, 'username' | 'start' | 'end' | 'deleted' | 'status'> {}

@@ -1,19 +1,28 @@
 import { BaseEntity } from './common'
 
-export interface UserEntity extends BaseEntity {
+export interface UserEntity {
   username: string
   birthDate: string
-  deleted: boolean
+  deleted?: boolean
   email: string
   employeeNumber: string
-  department: string
-  position: string
+  departmentName: string
+  positionName: string
   name: string
-  years: string
+  joiningDay: string
+  years: number
   password?: string
   phoneNumber: string
   fileName?: string
   role: UserRole
+  updatedAt: string
+}
+
+export interface SearchedUser {
+  total: number
+  first: boolean
+  last: boolean
+  content: UserEntity[]
 }
 
 export interface UserPayload {
@@ -24,7 +33,7 @@ export interface UserPayload {
   department: string
 }
 
-export enum UserRole {
-  'User' = 'User',
-  'Admin' = 'Admin',
+export const enum UserRole {
+  'ADMIN' = 'ADMIN',
+  'STAFF' = 'STAFF',
 }

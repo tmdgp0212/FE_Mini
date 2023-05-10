@@ -26,12 +26,15 @@ const palette = {
   green1: '#069C31',
   green2: '#E3FFEA',
   green3: '#ECF2F3',
+  green4: '#C9FAD7',
   gray1: '#AEAEAE',
   gray2: '#F0F0F0',
-  yellow: '#FEF9E4',
+  yellow1: '#FEF0BD',
+  yellow2: '#FEF9E4',
   black: '#222222',
   white: '#FAFAFA',
   orange: '#E2532D',
+  red: '#E2532D',
 }
 
 const typography = {
@@ -40,10 +43,10 @@ const typography = {
 
 const size = {
   header: {
-    height: '80px',
+    height: '65px',
   },
   nav: {
-    width: '280px',
+    width: '260px',
   },
   font: {
     small: '14px',
