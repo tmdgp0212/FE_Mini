@@ -5,6 +5,8 @@ import AcceptButtons from '../AcceptButtons'
 import Table from '../Table'
 import SelectedType from '../SelectedType'
 import { useGetDuty } from '../../hooks/useGetDuty'
+import { useAcceptDuty } from '../../hooks/useAcceptDuty'
+import { useAcceptVacation } from '../../hooks/useAcceptVacation'
 
 export const testUser = [
   {
@@ -55,15 +57,13 @@ export const testUser = [
 ]
 
 function UserScheduleControl() {
-  const AcceptFunc = () => {
-    console.log('연차/당직 승인')
-  }
-  const rejectFunc = () => {
-    console.log('연차/당직 반려')
-  }
   // const { duty } = useGetDuty()
-  const [type, setType] = useState('')
+  const [type, setType] = useState('duty')
   const [checkItems, setCheckItems] = useState<string[]>([])
+  const AcceptDuty = useAcceptDuty(true)
+  const rejectDuty = useAcceptDuty(false)
+  const AcceptVacation = useAcceptVacation(true)
+  const rejectVacation = useAcceptVacation(false)
 
   const checkedItemHandler = (id: string, isChecked: boolean) => {
     if (isChecked) {
@@ -121,8 +121,8 @@ function UserScheduleControl() {
         checkItems={checkItems}
         PositiveMsg="승인"
         NegativeMsg="거부"
-        acceptFunc={AcceptFunc}
-        rejectFunc={rejectFunc}
+        acceptFunc={type === 'duty' ? AcceptDuty : AcceptVacation}
+        rejectFunc={type === 'duty' ? rejectDuty : rejectVacation}
       />
     </>
   )
