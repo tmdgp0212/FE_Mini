@@ -3,14 +3,12 @@ import UserRegister from '../UserRegister'
 import { testUser } from '../UserScheduleControl'
 import * as S from './style'
 import AcceptButtons from '../AcceptButtons'
+import { useAcceptSignup } from '../../hooks/useAcceptSignup'
 
 function UserRegisterControl() {
-  const AcceptFunc = () => {
-    console.log('회원가입 승인')
-  }
-  const rejectFunc = () => {
-    console.log('회원가입 반려')
-  }
+  const AcceptFunc = useAcceptSignup(true)
+  const RejectFunc = useAcceptSignup(false)
+
   const [checkItems, setCheckItems] = useState<string[]>([])
 
   const checkedItemHandler = (id: string, isChecked: boolean) => {
@@ -47,7 +45,7 @@ function UserRegisterControl() {
           PositiveMsg="승인"
           NegativeMsg="거부"
           acceptFunc={AcceptFunc}
-          rejectFunc={rejectFunc}
+          rejectFunc={RejectFunc}
         />
       </div>
       <S.Container>
