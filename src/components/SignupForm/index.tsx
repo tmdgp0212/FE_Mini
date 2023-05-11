@@ -28,13 +28,20 @@ function SignupForm() {
 
   const [previewURL, setPreviewURL] = useState('')
 
-  const [checkUsernameMessage, setCheckUsernameMessage] = useState({ isSubmited: false, type: 'success', message: '' })
+  const [checkUsernameMessage, setCheckUsernameMessage] = useState({
+    isCheck: false,
+    isUseableUsername: false,
+    lastCheckUsername: '',
+    message: '',
+  })
 
   const {
     register,
     handleSubmit,
     getValues,
     setValue,
+    setError,
+    clearErrors,
     watch,
     control,
     formState: { errors },
@@ -42,7 +49,7 @@ function SignupForm() {
 
   const onSubmit: SubmitHandler<SignupForm> = async (data) => {
     // if(checkUsernameMessage.type === 'fail') return;
-
+    setCheckUsernameMessage((prev) => ({ ...prev, isCheck: false }))
     // transfile
     const {
       username,
@@ -175,7 +182,10 @@ function SignupForm() {
   }, [])
 
   useEffect(() => {
-    const subscription = watch(({ phoneNumber }, { name, type }) => {
+    const subscription = watch(({ username, phoneNumber }, { name, type }) => {
+      if (name === 'username') {
+        setCheckUsernameMessage((prev) => ({ ...prev, isCheck: false }))
+      }
       if (name !== 'phoneNumber' || !phoneNumber) return
 
       if (phoneNumber.length === 3) {
@@ -216,6 +226,20 @@ function SignupForm() {
                       minLength: { value: 8, message: '8자에서 16자 사이입니다' },
                       maxLength: { value: 16, message: '8자에서 16자 사이입니다' },
                       pattern: { value: /^[a-zA-Z0-9]*$/, message: '영문과 숫자만 입력 가능합니다' },
+                      validate: {
+                        isCheckUsername: () => {
+                          const username = getValues('username')
+
+                          if (!checkUsernameMessage.isCheck) return '사용가능한 username인지 확인해주세요'
+                          if (checkUsernameMessage.isCheck && checkUsernameMessage.lastCheckUsername !== username)
+                            return '사용가능한 username인지 확인해주세요'
+
+                          return true
+                        },
+                        isUseableUsername: () => {
+                          return !checkUsernameMessage.isUseableUsername ? '중복되는 username 입니다.' : true
+                        },
+                      },
                     })}
                     sx={{
                       width: '300px',
@@ -226,6 +250,9 @@ function SignupForm() {
                 <S.IdCheck
                   type="button"
                   onClick={async (e) => {
+                    clearErrors('username')
+                    const username = getValues('username')
+
                     const { data: payload } = await instance.get('/api/v1/join/check', {
                       params: { username: getValues('username') },
                     })
@@ -233,18 +260,21 @@ function SignupForm() {
                     const isExistUsername = !!payload.data
 
                     if (isExistUsername) {
-                      return setCheckUsernameMessage((prev) => ({
+                      setCheckUsernameMessage((prev) => ({
                         ...prev,
-                        isSubmited: true,
-                        type: 'fail',
-                        message: '중복되는 username 입니다.',
+                        isCheck: true,
+                        isUseableUsername: false,
+                        lastCheckUsername: username,
                       }))
+                      setError('username', { type: 'validate', message: '중복되는 username 입니다.' })
+                      return
                     }
 
                     setCheckUsernameMessage((prev) => ({
                       ...prev,
-                      isSubmited: true,
-                      type: 'success',
+                      isCheck: true,
+                      isUseableUsername: true,
+                      lastCheckUsername: username,
                       message: '사용가능한 username입니다.',
                     }))
                   }}
@@ -253,10 +283,8 @@ function SignupForm() {
                 </S.IdCheck>
               </div>
               {errors?.username ? <span style={{ color: 'red' }}>{errors?.username.message as string}</span> : null}
-              {checkUsernameMessage.isSubmited ? (
-                <span style={{ color: checkUsernameMessage.type === 'success' ? 'green' : 'red' }}>
-                  {checkUsernameMessage.message}
-                </span>
+              {checkUsernameMessage.isCheck && checkUsernameMessage.isUseableUsername ? (
+                <span style={{ color: theme.app.palette.green1 }}>{checkUsernameMessage.message}</span>
               ) : null}
               <div style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '5px 5px 5px 19px' }}>
                 <label htmlFor="name" style={{ fontWeight: '600', minWidth: '27.4px' }}>
