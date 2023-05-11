@@ -33,7 +33,7 @@ export interface UserPayload {
   department: string
 }
 
-export const enum UserRole {
-  'ADMIN' = 'ADMIN',
-  'STAFF' = 'STAFF',
+export enum UserRole {
+  'User' = '일반',
+  'Admin' = '관리자',
 }
