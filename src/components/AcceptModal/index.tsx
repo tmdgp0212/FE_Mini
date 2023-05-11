@@ -24,6 +24,7 @@ export default function AcceptModal({
   const { showToast } = useToast('승인 완료')
   const theme = useTheme()
   const handleClick = () => {
+    console.log(location.pathname)
     modalMsg === '승인' ? acceptFunc() : rejectFunc()
     handleClose()
     showToast()

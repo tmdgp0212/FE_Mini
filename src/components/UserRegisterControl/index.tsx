@@ -4,11 +4,12 @@ import { testUser } from '../UserScheduleControl'
 import * as S from './style'
 import AcceptButtons from '../AcceptButtons'
 import { useAcceptSignup } from '../../hooks/useAcceptSignup'
+import { useGetSignUp } from '../../hooks/useGetSignUp'
 
 function UserRegisterControl() {
   const AcceptFunc = useAcceptSignup(true)
   const RejectFunc = useAcceptSignup(false)
-
+  const getSignUp = useGetSignUp()
   const [checkItems, setCheckItems] = useState<string[]>([])
 
   const checkedItemHandler = (id: string, isChecked: boolean) => {

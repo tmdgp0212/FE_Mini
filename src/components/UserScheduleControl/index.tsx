@@ -7,6 +7,7 @@ import SelectedType from '../SelectedType'
 import { useGetDuty } from '../../hooks/useGetDuty'
 import { useAcceptDuty } from '../../hooks/useAcceptDuty'
 import { useAcceptVacation } from '../../hooks/useAcceptVacation'
+import { useGetVacation } from '../../hooks/useGetVacation'
 
 export const testUser = [
   {
@@ -57,7 +58,9 @@ export const testUser = [
 ]
 
 function UserScheduleControl() {
-  // const { duty } = useGetDuty()
+  const duty = useGetDuty()
+  const vacations = useGetVacation()
+  console.log(duty, vacations)
   const [type, setType] = useState('duty')
   const [checkItems, setCheckItems] = useState<string[]>([])
   const AcceptDuty = useAcceptDuty(true)
