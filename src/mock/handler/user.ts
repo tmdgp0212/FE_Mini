@@ -1,7 +1,11 @@
 import { rest } from 'msw'
+import { API_URL } from '../../api/constants'
+import { jwtDecode } from '../../util/jwt'
+import { mockUserList } from '../db'
+import { removeCookie } from '../../util'
 
 export const userHandler = [
-  rest.get('/api/v1/member/search', (req, res, ctx) => {
+  rest.get(API_URL.v1.search, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
@@ -11,37 +15,30 @@ export const userHandler = [
       }),
     )
   }),
-  rest.get('/api/v1/member/detail/:id', (req, res, ctx) => {
-    const params = req.params
+  rest.get(API_URL.v1.getUserDetail, (req, res, ctx) => {
+    const accessToken = req.cookies?.accessToken
+
+    const decoded = jwtDecode(accessToken)
+
+    if (!accessToken || !decoded) {
+      return res(ctx.status(401), ctx.json({ status: 401, message: 'token is null or too short', data: false }))
+    }
+
+    const user = mockUserList.find((user) => user.username === decoded?.username)
 
     return res(
       ctx.status(200),
       ctx.json({
         status: 200,
-        message: '',
-        data: true,
+        message: 'success',
+        data: {
+          ...user,
+        },
       }),
     )
   }),
-  rest.post('/api/v1/join', async (req, res, ctx) => {
+  rest.post(API_URL.v1.signup, async (req, res, ctx) => {
     const body = await req.json()
-
-    return res(
-      ctx.status(200),
-      ctx.json({
-        status: 200,
-        message: '',
-        data: true,
-      }),
-    )
-  }),
-  rest.post('/api/v1/loginTest', async (req, res, ctx) => {
-    const body = await req.json()
-
-    const testJWT =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.' +
-      'eyJzdWIiOiIxMjM0NTY3ODkwIiwidXNlcm5hbWUiOiJhZG1pbiIsImlhdCI6MTUxNjIzOTAyMn0.' +
-      'lI7kQCfzQVDjl5WZaApceqqWwlEsKbL4-ECONjArLBE'
 
     return res(
       ctx.status(200),
