@@ -1,27 +1,8 @@
 import { rest } from 'msw'
-<<<<<<< HEAD
 import { API_URL } from '../../api/constants'
 import { jwtDecode } from '../../util/jwt'
 import { mockUserList } from '../db'
 import { removeCookie } from '../../util'
-=======
-import User from '../user.json'
-
-const user: unknown[] = []
-
-export interface SignupRequestForm {
-  username: string
-  password: string
-  fileName?: string
-  departmentName: string
-  positionName: string
-  phoneNumber: string
-  name: string
-  email: string
-  birthDate: Date
-  joiningDay: Date
-}
->>>>>>> 830d8ae2cba56db811e7d81d50796c38ce306053
 
 export const userHandler = [
   rest.get(API_URL.v1.search, (req, res, ctx) => {

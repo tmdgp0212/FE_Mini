@@ -45,7 +45,6 @@ function LoginForm() {
   }
 
   return (
-<<<<<<< HEAD
     <form style={{ display: 'flex', marginLeft: '20px', gap: '12px' }} onSubmit={handleSubmit(onSubmit, onInvalid)}>
       <S.InputGroup>
         <label htmlFor="user-email">ID</label>
@@ -73,12 +72,6 @@ function LoginForm() {
         fontcolor={theme.app.palette.white}
         style={{ paddingTop: '0.2rem', paddingBottom: '0.2rem' }}
       >
-=======
-    <form style={{ display: 'flex' }} onSubmit={handleSubmit(onSubmit, onInvalid)}>
-      <TextField variant="outlined" {...register('username', { required: 'username is required' })} />
-      <TextField type="password" variant="outlined" {...register('password', { required: 'password is required' })} />
-      <Button type="submit" variant="contained" bg={theme.app.palette.green1} fontcolor={theme.app.palette.white}>
->>>>>>> 830d8ae2cba56db811e7d81d50796c38ce306053
         Login
       </Button>
     </form>
