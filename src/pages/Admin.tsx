@@ -4,6 +4,7 @@ import NoticeForm from '../components/NoticeForm'
 import { useAccessTokenInfo } from '../store/slices/userSlice'
 
 function Admin() {
+<<<<<<< HEAD
   const { user } = useAccessTokenInfo()
 
   console.log('payload', user.userPayload)
@@ -17,6 +18,10 @@ function Admin() {
   ) : (
     <></>
   )
+=======
+  const user = useProtectedOulet()
+  return user && user.role === UserRole['ADMIN'] ? <Outlet /> : null
+>>>>>>> 830d8ae2cba56db811e7d81d50796c38ce306053
 }
 
 export default Admin

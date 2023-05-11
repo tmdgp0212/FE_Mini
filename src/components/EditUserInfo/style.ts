@@ -5,38 +5,22 @@ export const EditUserContainer = styled.div`
 
   .fixedData {
     display: flex;
-    justify-content: space-between;
-    gap: 40px;
-    padding: 0 35px 25px;
+    align-items: center;
 
-    .left {
-      display: grid;
-      column-gap: 15px;
-      grid-template-columns: 100px 1fr;
-      line-height: 1.2;
-
-      img {
-        display: block;
-        grid-row: 1 / span 2;
-        width: 100%;
-      }
-
-      .name {
-        align-self: end;
-        font-size: ${({ theme }) => theme.app.size.font.large};
-        font-weight: 800px;
-      }
-      .username {
-        color: ${({ theme }) => theme.app.palette.gray1};
-        font-size: ${({ theme }) => theme.app.size.font.medium};
-        font-weight: 600px;
-      }
+    img {
+      display: block;
+      width: 50px;
+      height: 50px;
     }
-    .right {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      line-height: 1.4;
+    .name {
+      font-size: ${({ theme }) => theme.app.size.font.large};
+      font-weight: 600;
+      padding: 0 5px 0 15px;
+    }
+    .username {
+      color: ${({ theme }) => theme.app.palette.gray1};
+      font-size: ${({ theme }) => theme.app.size.font.medium};
+      font-weight: 600px;
     }
   }
 
@@ -45,7 +29,7 @@ export const EditUserContainer = styled.div`
     flex-direction: column;
     align-items: flex-end;
     padding: 25px 0;
-    border-top: 1px solid ${({ theme }) => theme.app.palette.gray1};
+    /* border-top: 1px solid ${({ theme }) => theme.app.palette.gray1}; */
     border-bottom: 1px solid ${({ theme }) => theme.app.palette.gray1};
 
     .inputs {
@@ -60,7 +44,8 @@ export const EditUserContainer = styled.div`
         text-align: right;
       }
 
-      input {
+      input,
+      select {
         margin-right: 35px;
       }
     }
@@ -71,7 +56,7 @@ export const EditUserContainer = styled.div`
     }
   }
 
-  .editRole {
+  .edit-role {
     padding: 25px 0 0;
 
     .editor-toggle {
@@ -95,12 +80,32 @@ export const EditUserContainer = styled.div`
       }
     }
 
+    .now-role {
+      display: flex;
+      justify-content: center;
+      padding-top: 25px;
+      font-size: ${({ theme }) => theme.app.size.font.small};
+
+      table {
+        text-align: center;
+
+        th,
+        td {
+          padding: 8px 25px;
+          border: 1px solid ${({ theme }) => theme.app.palette.gray1};
+        }
+        th {
+          background-color: ${({ theme }) => theme.app.palette.green2};
+        }
+      }
+    }
+
     .selet-role {
       display: flex;
       justify-content: center;
       position: relative;
       gap: 150px;
-      padding: 25px 80px 0 0px;
+      padding: 20px 80px 0 0;
 
       div {
         display: flex;
