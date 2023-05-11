@@ -1,4 +1,5 @@
 import { instance } from './instance'
+import { PositionEditReq, PositionRegisterReq } from './type'
 
 export const getPositions = async () => {
   const res = await instance.get('/api/v1/position/list')
@@ -6,7 +7,7 @@ export const getPositions = async () => {
   return res.data
 }
 
-export const registrationPosition = async (position: { positionName: string; vacation: string }) => {
+export const registrationPosition = async (position: PositionRegisterReq) => {
   const res = await instance.post('/api/v1/position/save', position)
   console.log(res)
   return res.data
@@ -18,8 +19,8 @@ export const getPosition = async (positionName: string) => {
   return res.data
 }
 
-export const editPosition = async (positionName: string, vacation: { vacation: string }) => {
-  const res = await instance.post(`/api/v1/position/modify/${positionName}`, vacation)
+export const editPosition = async ({ name, vacation }: PositionEditReq) => {
+  const res = await instance.post(`/api/v1/position/modify/${name}`, { vacation })
   console.log(res)
   return res.data
 }

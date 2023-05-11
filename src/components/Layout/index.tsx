@@ -44,6 +44,8 @@ function Layout({ user }: LayoutProps) {
                   { title: '연차/당직 신청내역', to: '/admin/vacation' },
                   { title: '회원가입 신청내역', to: '/admin/signup' },
                   { title: '유저정보 관리', to: '/admin/user' },
+                  { title: '직급 관리', to: '/admin/position' },
+                  { title: '부서 관리', to: '/admin/department' },
                 ]}
               />
             </>

@@ -7,5 +7,19 @@ import Logout from './Logout'
 import UserControl from './UserControl'
 import RegisterControl from './RegisterControl'
 import ScheduleControl from './ScheduleControl'
+import PositionEditor from '../pages/PositionEditor'
+import DepartmentEditor from '../pages/DepartmentEditor'
 
-export { Home, Signup, User, Admin, Logout, NotFound, UserControl, RegisterControl, ScheduleControl }
+export {
+  Home,
+  Signup,
+  User,
+  Admin,
+  Logout,
+  NotFound,
+  UserControl,
+  RegisterControl,
+  ScheduleControl,
+  PositionEditor,
+  DepartmentEditor,
+}

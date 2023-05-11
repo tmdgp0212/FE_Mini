@@ -1,20 +1,20 @@
 import React, { useState } from 'react'
-import { PositionEntity } from '../../types/position'
-import { PositionEditReq } from '../../api/type'
+import { DepartmentEditReq } from '../../api/type'
+import { DepartmentEntity } from '../../types/department'
 
-interface PositionItemProps {
-  position: PositionEntity
+interface DepartmentItemProps {
+  department: DepartmentEntity
   onEdit: (name: string, vacation: number) => void
-  onDelete: (positionName: string) => void
+  onDelete: (departmentName: string) => void
 }
 
-function PositionListItem({ position, onEdit, onDelete }: PositionItemProps) {
-  const [vacationInput, setVacationInput] = useState(position.vacation)
+function DepartmentListItem({ department, onEdit, onDelete }: DepartmentItemProps) {
+  const [vacationInput, setVacationInput] = useState(department.vacationLimit)
   const [isEdit, setIsEdit] = useState(false)
 
   const clickEditButton = () => {
     if (isEdit) {
-      setVacationInput(position.vacation)
+      setVacationInput(department.vacationLimit)
     }
     setIsEdit((prev) => !prev)
   }
@@ -24,20 +24,20 @@ function PositionListItem({ position, onEdit, onDelete }: PositionItemProps) {
   }
 
   const handleConfirmEdit = () => {
-    onEdit(position.positionName, vacationInput)
+    onEdit(department.departmentName, vacationInput)
     setIsEdit(false)
   }
 
   return (
     <li className="row">
-      <span>{position.positionName}</span>
+      <span>{department.departmentName}</span>
       {isEdit ? (
         <>
           <input name="vacation" type="number" onChange={inputChangeHandler} value={vacationInput} />
         </>
       ) : (
         <>
-          <span>{position.vacation}</span>
+          <span>{department.vacationLimit}</span>
         </>
       )}
 
@@ -52,7 +52,7 @@ function PositionListItem({ position, onEdit, onDelete }: PositionItemProps) {
         <span
           className="delete btn"
           onClick={() => {
-            onDelete(position.positionName)
+            onDelete(department.departmentName)
           }}
         >
           삭제
@@ -62,4 +62,4 @@ function PositionListItem({ position, onEdit, onDelete }: PositionItemProps) {
   )
 }
 
-export default PositionListItem
+export default DepartmentListItem

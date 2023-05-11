@@ -1,44 +1,6 @@
 import styled from '@emotion/styled'
 
-export const PositionManagerContainer = styled.div`
-  h2 {
-    font-size: ${({ theme }) => theme.app.size.font.large};
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 25px;
-  }
-`
-
-export const PositionForm = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  gap: 12px;
-  padding: 0 40px;
-  height: 60px;
-  background-color: ${({ theme }) => theme.app.palette.green3};
-  border-radius: 5px;
-
-  label {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-
-    &.position {
-      margin-right: 8px;
-    }
-
-    input {
-      flex-grow: 1;
-
-      &#vacation {
-        width: 120px;
-      }
-    }
-  }
-`
-export const PositionList = styled.div`
+export const DepartmentList = styled.div`
   margin-top: 25px;
   width: 100%;
   height: 250px;

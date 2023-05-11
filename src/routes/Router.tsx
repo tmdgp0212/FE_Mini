@@ -1,5 +1,17 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Admin, Home, NotFound, Signup, User, Logout, UserControl, RegisterControl, ScheduleControl } from '../pages'
+import {
+  Admin,
+  Home,
+  NotFound,
+  Signup,
+  User,
+  Logout,
+  UserControl,
+  RegisterControl,
+  ScheduleControl,
+  DepartmentEditor,
+  PositionEditor,
+} from '../pages'
 import ProtectedRouter from './ProtectedRouter'
 
 function Router() {
@@ -16,6 +28,8 @@ function Router() {
             <Route path="vacation" element={<ScheduleControl />} />
             <Route path="signup" element={<RegisterControl />} />
             <Route path="user" element={<UserControl />} />
+            <Route path="position" element={<PositionEditor />} />
+            <Route path="department" element={<DepartmentEditor />} />
           </Route>
           <Route path="/signup" element={<Signup />} />
           <Route path="/logout" element={<Logout />} />
