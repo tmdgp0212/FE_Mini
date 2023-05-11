@@ -1,4 +1,7 @@
 import { rest } from 'msw'
+import User from '../user.json'
+
+const user: unknown[] = []
 
 export const userHandler = [
   rest.get('/api/v1/member/search', (req, res, ctx) => {
@@ -11,15 +14,13 @@ export const userHandler = [
       }),
     )
   }),
-  rest.get('/api/v1/member/detail/:id', (req, res, ctx) => {
-    const params = req.params
-
+  rest.get('/api/v1/members/detail', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
         status: 200,
-        message: '',
-        data: true,
+        message: 'success',
+        data: User[0],
       }),
     )
   }),

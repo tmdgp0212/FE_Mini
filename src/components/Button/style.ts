@@ -5,22 +5,19 @@ import { ButtonProps } from './'
 import { darken } from '@mui/material/styles'
 
 export const Button = styled(MaterialButton)<ButtonProps>`
-  height: 28px;
-  line-height: 28px;
-
-  ${(props) =>
-    props.bg
+  ${({ bg }) =>
+    bg
       ? css`
-          background-color: ${props.bg};
+          background-color: ${bg};
           &:hover {
-            background-color: ${darken(props.bg, 0.2)};
+            background-color: ${darken(bg, 0.2)};
           }
         `
       : css``}
-  ${(props) =>
-    props.fontColor
+  ${({ fontColor }) =>
+    fontColor
       ? css`
-          color: ${props.fontColor};
+          color: ${fontColor};
         `
       : css``}
 `

@@ -1,0 +1,14 @@
+[
+  {
+    "username": "myid012",
+    "role": "Admin",
+    "fileName": "https://cdnimg.melon.co.kr/cm2/artistcrop/images/002/61/143/261143_20210325180240_org.jpg?61e575e8653e5920470a38d1482d7312/melon/optimize/90",
+    "email": "test123@gmail.com",
+    "phoneNumber": "010-1234-1234",
+    "employeeNumber": "12341234",
+    "department": "개발팀",
+    "position": "대리",
+    "startDate": "2020-01-01",
+    "years": "4"
+  }
+]
