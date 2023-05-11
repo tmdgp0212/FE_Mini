@@ -11,7 +11,7 @@ function ProtectedRouter() {
   const [user, setUser] = useState<UserPayload | null>({
     username: 'oysterjung',
     name: '정석화',
-    role: UserRole.Admin,
+    role: UserRole.ADMIN,
     department: '개발',
     profile: 'https://picsum.photos/seed/picsum/200/300',
   })
