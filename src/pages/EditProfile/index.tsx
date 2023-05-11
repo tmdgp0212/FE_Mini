@@ -333,8 +333,8 @@ function EditProfile() {
                         },
                       })}
                     />
-                    {errors?.currentPassword && (
-                      <div style={{ color: 'red', fontSize: '10px' }}>{errors.currentPassword.message as string}</div>
+                    {errors?.oldPassword && (
+                      <div style={{ color: 'red', fontSize: '10px' }}>{errors.oldPassword.message as string}</div>
                     )}
                   </S.InputWrapper>
                   <S.InputWrapper>
