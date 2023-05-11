@@ -1,10 +1,7 @@
 import BigCalendar from '../components/Calendar/BigCalendar'
 import Title from '../components/Title'
-import { useProtectedOulet } from '../hooks/useProtectedOutlet'
 
 function Home() {
-  const user = useProtectedOulet()
-
   return (
     <div>
       <Title text="전체 일정" />

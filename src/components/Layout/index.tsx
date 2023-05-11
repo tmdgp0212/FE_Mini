@@ -1,25 +1,34 @@
-import * as S from './style'
+import React from 'react'
 import { ReactComponent as Logo } from '../../assets/logo.svg'
 import { Link, Outlet } from 'react-router-dom'
-import { AiOutlineUser } from 'react-icons/ai'
 import { GrHomeRounded, GrUserAdmin } from 'react-icons/gr'
+import { AiOutlineUser } from 'react-icons/ai'
 import { MdLogout } from 'react-icons/md'
 import NestedNav from './nestedNav'
 import UserArea from '../userArea'
-import { UserPayload, UserRole } from '../../types/user'
+import { UserRole } from '../../types/user'
+import * as S from './style'
+import { UserActionPayload, setUser, useAccessTokenInfo } from '../../store/slices/userSlice'
+import { getCookie } from '../../util'
+import { jwtDecode } from '../../util/jwt'
 
-interface LayoutProps {
-  user?: UserPayload | null
-}
+function Layout() {
+  const { user, dispatch } = useAccessTokenInfo()
 
-function Layout({ user }: LayoutProps) {
+  const accessToken = getCookie('accessToken')
+  const refreshToken = getCookie('refrehToken')
+
+  if ((accessToken || refreshToken) && !user.userPayload) {
+    dispatch(setUser(jwtDecode(accessToken || refreshToken) as UserActionPayload))
+  }
+
   return (
     <S.Grid>
       <S.Header>
         <Link to="/">
           <Logo />
         </Link>
-        <UserArea user={user} />
+        <UserArea user={user.userPayload} />
       </S.Header>
       <S.Nav>
         <S.NavGroup>
@@ -35,27 +44,26 @@ function Layout({ user }: LayoutProps) {
               { title: '내 연차/당직 관리', to: '/user/vacation' },
             ]}
           />
-          {user?.role === UserRole.Admin ? (
-            <>
-              <NestedNav
-                mainTitle="admin"
-                mainIcon={<GrUserAdmin />}
-                menuInfoList={[
-                  { title: '연차/당직 신청내역보기', to: '/admin/vacation' },
-                  { title: '회원가입 신청내역보기', to: '/admin/signup' },
-                  { title: '유저 정보 수정', to: '/admin/user' },
-                ]}
-              />
-            </>
-          ) : (
-            <></>
-          )}
+          <NestedNav
+            mainTitle="admin"
+            mainIcon={<GrUserAdmin />}
+            menuInfoList={[
+              { title: '연차/당직 신청내역보기', to: '/admin/vacation' },
+              { title: '회원가입 신청내역보기', to: '/admin/signup' },
+              { title: '유저 정보 수정', to: '/admin/user' },
+            ]}
+            isAuth={!!user?.userPayload && UserRole[user.userPayload.role] === UserRole.ADMIN}
+          />
         </S.NavGroup>
-        <S.NavItem to="/logout">
-          <MdLogout /> Logout
-        </S.NavItem>
+        {user?.userPayload ? (
+          <S.NavItem to="/logout">
+            <MdLogout /> Logout
+          </S.NavItem>
+        ) : null}
       </S.Nav>
-      <S.Page id="page">{user ? <Outlet context={{ user }} /> : <div>로그인 해주세요</div>}</S.Page>
+      <S.Page id="page">
+        <Outlet />
+      </S.Page>
     </S.Grid>
   )
 }

@@ -1,17 +1,15 @@
-import { BaseEntity } from './common'
+import { User } from './user'
 
-export interface VacationTempEntity extends BaseEntity {
-  username: string
+export interface Vacation {
+  id: number
   start: string
   end: string
-  deleted: boolean
+  member: User
   status: VacationStatus
 }
 
-export interface VacationEntity extends VacationTempEntity {}
-
 export enum VacationStatus {
-  'WATING',
+  'WAITING',
   'OK',
   'REJECTED',
 }
