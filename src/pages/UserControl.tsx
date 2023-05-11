@@ -8,6 +8,7 @@ import Title from '../components/Title'
 import { SearchedUser, UserEntity, UserRole } from '../types/user'
 import { useMutation } from '@tanstack/react-query'
 import Pagenation from '../components/Pagenation'
+import PositionManager from '../components/PositionManager'
 
 export type SearchType = 'EMAIL' | 'POSITION' | 'NAME' | 'DEPARTMENT'
 interface SearchMutateKey {
@@ -74,6 +75,7 @@ const dummy: SearchedUser = {
 
 function UserControl() {
   const [openModal, setOpenModal] = useState(false)
+  const [openPositionModal, setOpenPositionModal] = useState(false)
   const [userData, setUserData] = useState<UserEntity>()
   const [searchType, setSearchType] = useState<SearchType>('NAME')
   const [searchInput, setSearchInput] = useState('')
@@ -126,6 +128,7 @@ function UserControl() {
       <SearchUser
         searchType={searchType}
         searchInput={searchInput}
+        modalHandler={setOpenPositionModal}
         searchInputChange={searchInputChange}
         searchTypeChange={searchTypeChange}
         getAllUsers={getAllUsers}
@@ -139,6 +142,11 @@ function UserControl() {
       {openModal && (
         <Modal ModalHandler={setOpenModal}>
           <EditUserInfo userData={userData} />
+        </Modal>
+      )}
+      {openPositionModal && (
+        <Modal ModalHandler={setOpenPositionModal}>
+          <PositionManager />
         </Modal>
       )}
     </>

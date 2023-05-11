@@ -1,5 +1,5 @@
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { Calendar, dayjsLocalizer, NavigateAction, Event } from 'react-big-calendar'
+import { Calendar, dayjsLocalizer, Event } from 'react-big-calendar'
 import { dayjsInstance } from '../../util'
 import { useMutation } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'

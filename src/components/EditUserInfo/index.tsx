@@ -31,7 +31,6 @@ function EditUserInfo({ userData }: EditUserProps) {
   })
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(input)
     setInput({ ...input, [e.target.name]: e.target.value })
   }
 

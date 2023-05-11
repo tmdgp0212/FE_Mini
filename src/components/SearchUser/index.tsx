@@ -1,12 +1,13 @@
 import { useTheme } from '@emotion/react'
 import Button from '../Button'
 import * as S from './style'
-import React from 'react'
+import React, { SetStateAction } from 'react'
 import { SearchType } from '../../pages/UserControl'
 
 interface SearchUserProps {
   searchType: SearchType
   searchInput: string
+  modalHandler: React.Dispatch<SetStateAction<boolean>>
   searchInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   searchTypeChange: (e: React.ChangeEvent<HTMLSelectElement>) => void
   getAllUsers: () => void
@@ -16,6 +17,7 @@ interface SearchUserProps {
 function SearchUser({
   searchType,
   searchInput,
+  modalHandler,
   searchInputChange,
   searchTypeChange,
   getAllUsers,
@@ -24,6 +26,14 @@ function SearchUser({
   const theme = useTheme()
   return (
     <S.SearchForm>
+      <div
+        className="position-manager"
+        onClick={() => {
+          modalHandler(true)
+        }}
+      >
+        직급관리
+      </div>
       <S.SearchType>
         <label htmlFor="type">검색조건</label>
         <select id="type" onChange={searchTypeChange} value={searchType}>
