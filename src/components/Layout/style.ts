@@ -27,41 +27,41 @@ export const Header = styled.header`
 `
 
 export const Nav = styled.nav`
-  box-sizing: border-box;
-  grid-area: nav;
-  position: sticky;
-  background-color: ${({ theme }) => theme.app.palette.green3};
-  top: ${({ theme }) => theme.app.size.header.height};
-  z-index: 8;
   display: flex;
+  position: sticky;
   flex-direction: column;
   justify-content: space-between;
+  grid-area: nav;
   padding: 40px 25px 25px;
   min-height: 100%;
   height: max-content;
+  top: ${({ theme }) => theme.app.size.header.height};
+  background-color: ${({ theme }) => theme.app.palette.green3};
+  z-index: 8;
 `
 
 export const NavItem = styled(NavLink)`
-  width: 100%;
-  height: 40px;
-  box-sizing: border-box;
-  flex-shrink: 0;
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
+  flex-shrink: 0;
   padding: 8px 10px;
-  border-radius: 5px;
-  text-decoration: none;
+  width: 100%;
+  height: 40px;
   color: ${({ theme }) => theme.app.palette.black};
+  text-decoration: none;
+  border-radius: 5px;
   transition: background-color 0.2s;
+
   &:hover {
     background-color: ${({ theme }) => theme.app.palette.green1};
     color: ${({ theme }) => theme.app.palette.white};
 
-    svg {
-      color: ${({ theme }) => theme.app.palette.white};
+    svg path {
+      stroke: ${({ theme }) => theme.app.palette.white};
     }
   }
+
   &.active {
     ${({ theme }) =>
       css`
@@ -69,13 +69,17 @@ export const NavItem = styled(NavLink)`
         box-shadow: 0 5px 8px 0 #5ebc678f;
         color: ${theme.app.palette.white};
       `}
+
+    svg path {
+      stroke: ${({ theme }) => theme.app.palette.white};
+    }
   }
 `
 
 export const NavGroup = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 15px;
 
   > div {
     width: 100%;

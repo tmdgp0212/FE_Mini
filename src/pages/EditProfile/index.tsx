@@ -26,7 +26,7 @@ interface MyInfoFormData {
 }
 
 async function fetchUser() {
-  const res = await instance.get('/api/v1/members/detail')
+  const res = await instance.get('/api/v1/member/detail')
 
   return res.data.data
 }
@@ -51,7 +51,6 @@ async function modifyMyInfo({ name, email, fileName, phoneNumber, oldPassword, n
 
   if (status !== 200) {
     throw new Error('')
-    return
   }
 
   if (fileName) {
@@ -220,7 +219,7 @@ function EditProfile() {
             </S.Detail>
           </S.UserCompanyDetail>
           <S.ButtonWrapper>
-            <Button disabled={isClicked} onClick={handleClick} bg="#069C31" fontColor="#fff" size="large">
+            <Button disabled={isClicked} onClick={handleClick} bg="#069C31" fontcolor="#fff" size="large">
               수정
             </Button>
           </S.ButtonWrapper>
@@ -234,7 +233,7 @@ function EditProfile() {
               <Button
                 variant="contained"
                 bg="#069C31"
-                fontColor="#fff"
+                fontcolor="#fff"
                 size="small"
                 onClick={(e) => {
                   const target = e.currentTarget as HTMLButtonElement
@@ -392,7 +391,7 @@ function EditProfile() {
               </S.Detail>
             </S.UserCompanyDetail>
             <S.ButtonWrapper>
-              <Button variant="contained" bg="#069C31" fontColor="#fff" size="large" type="submit" form="user-form">
+              <Button variant="contained" bg="#069C31" fontcolor="#fff" size="large" type="submit" form="user-form">
                 변경완료
               </Button>
             </S.ButtonWrapper>
