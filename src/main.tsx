@@ -1,12 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
+import App from './App'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { worker } from './mock/browser.ts'
+import { worker } from './mock/browser'
 import { Global } from '@emotion/react'
-import GlobalStyle from './style/globalStyle.ts'
+import GlobalStyle from './style/globalStyle'
 import { ThemeProvider } from '@mui/material/styles'
-import { theme } from './style/theme.ts'
+import { theme } from './style/theme'
 
 if (import.meta.env.VITE_MOCKING_ENABLE === 'true') {
   worker.start({ onUnhandledRequest: 'bypass' })

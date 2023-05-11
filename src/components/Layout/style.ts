@@ -23,6 +23,7 @@ export const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 9;
 `
 
 export const Nav = styled.nav`
@@ -30,11 +31,14 @@ export const Nav = styled.nav`
   grid-area: nav;
   position: sticky;
   background-color: ${({ theme }) => theme.app.palette.green3};
-  top: 0;
+  top: ${({ theme }) => theme.app.size.header.height};
+  z-index: 8;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 200px 12px 12px;
+  padding: 50px 12px 12px;
+  min-height: 100%;
+  height: max-content;
 `
 
 export const NavItem = styled(NavLink)`
@@ -70,6 +74,9 @@ export const NavGroup = styled.div`
 `
 
 export const Page = styled.div`
+  position: relative;
+  padding: 40px;
+  box-sizing: border-box;
   grid-area: page;
   overflow: auto;
 `
