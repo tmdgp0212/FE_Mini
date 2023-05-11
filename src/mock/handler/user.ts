@@ -34,7 +34,6 @@ export const userHandler = [
       }),
     )
   }),
-<<<<<<< HEAD
   rest.get(API_URL.v1.getUserDetail, (req, res, ctx) => {
     const accessToken = req.cookies?.accessToken
 
@@ -46,21 +45,14 @@ export const userHandler = [
 
     const user = mockUserList.find((user) => user.username === decoded?.username)
 
-=======
-  rest.get('/api/v1/members/detail', (req, res, ctx) => {
->>>>>>> 830d8ae2cba56db811e7d81d50796c38ce306053
     return res(
       ctx.status(200),
       ctx.json({
         status: 200,
         message: 'success',
-<<<<<<< HEAD
         data: {
           ...user,
         },
-=======
-        data: User[0],
->>>>>>> 830d8ae2cba56db811e7d81d50796c38ce306053
       }),
     )
   }),
