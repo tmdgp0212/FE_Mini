@@ -7,11 +7,28 @@ import { FieldValues, SubmitErrorHandler, SubmitHandler, useForm, Controller } f
 import Title from '../Title'
 import { useEffect, useState } from 'react'
 import { dayjsInstance } from '../../util'
+import { instance } from '../../api/instance'
+
+interface SignupForm {
+  username: string
+  password: string
+  passwordRemind: string
+  fileName?: File
+  departmentName: string
+  positionName: string
+  phoneNumber: string
+  name: string
+  email: string
+  joiningDay: Date
+  birthDate: Date
+}
 
 function SignupForm() {
   const theme = useTheme()
 
   const [previewURL, setPreviewURL] = useState('')
+
+  const [checkUsernameMessage, setCheckUsernameMessage] = useState({ isSubmited: false, type: 'success', message: '' })
 
   const {
     register,
@@ -21,13 +38,87 @@ function SignupForm() {
     watch,
     control,
     formState: { errors },
-  } = useForm()
+  } = useForm<SignupForm>()
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log({ data })
-    // data
+  const onSubmit: SubmitHandler<SignupForm> = async (data) => {
+    // if(checkUsernameMessage.type === 'fail') return;
+
+    // transfile
+    const {
+      username,
+      password,
+      fileName,
+      departmentName,
+      positionName,
+      phoneNumber,
+      name,
+      email,
+      birthDate,
+      joiningDay,
+    } = data
+
+    if (fileName.name) {
+      const tempUploadFormData = new FormData()
+
+      tempUploadFormData.append('fileNames', fileName)
+
+      const { data: tempUploadResponse } = await instance.post(
+        '/api/v1/temp/upload',
+        { fileNames: tempUploadFormData.get('fileNames') },
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      )
+
+      const signupFormData = new FormData()
+      signupFormData.append('username', username)
+      signupFormData.append('password', password)
+      signupFormData.append('fileName', tempUploadResponse.data)
+      signupFormData.append('departmentName', departmentName)
+      signupFormData.append('positionName', positionName)
+      signupFormData.append('phoneNumber', phoneNumber)
+      signupFormData.append('name', name)
+      signupFormData.append('email', email)
+      signupFormData.append('birthDate', dayjsInstance(birthDate).format('YYYY-MM-DD'))
+      signupFormData.append('joiningDay', dayjsInstance(joiningDay).format('YYYY-MM-DD'))
+
+      const { data: signupResponse } = await instance.post('/api/v1/join', {
+        username: signupFormData.get('username'),
+        password: signupFormData.get('password'),
+        fileName: signupFormData.get('fileName'),
+        departmentName: signupFormData.get('departmentName'),
+        positionName: signupFormData.get('positionName'),
+        phoneNumber: signupFormData.get('phoneNumber'),
+        name: signupFormData.get('name'),
+        email: signupFormData.get('email'),
+        birthDate: signupFormData.get('birthDate'),
+        joiningDay: signupFormData.get('joiningDay'),
+      })
+
+      console.log('signup: ', signupResponse)
+
+      return
+    }
+
+    const { data: signupResponse } = await instance.post('/api/v1/join', {
+      username,
+      password,
+      departmentName,
+      positionName,
+      phoneNumber,
+      name,
+      email,
+      birthDate: dayjsInstance(birthDate).format('YYYY-MM-DD'),
+      joiningDay: dayjsInstance(joiningDay).format('YYYY-MM-DD'),
+    })
+
+    console.log('signup: ', signupResponse)
+
+    return
   }
-  const onInvalid: SubmitErrorHandler<FieldValues> = (error) => {
+  const onInvalid: SubmitErrorHandler<SignupForm> = (error) => {
     const joiningDay = getValues('joiningDay')
     const birthDate = getValues('birthDate')
 
@@ -85,7 +176,7 @@ function SignupForm() {
 
   useEffect(() => {
     const subscription = watch(({ phoneNumber }, { name, type }) => {
-      if (name !== 'phoneNumber') return
+      if (name !== 'phoneNumber' || !phoneNumber) return
 
       if (phoneNumber.length === 3) {
         setValue('phoneNumber', phoneNumber + '-')
@@ -132,9 +223,41 @@ function SignupForm() {
                     }}
                   />
                 </div>
-                <S.IdCheck type="button">중복확인</S.IdCheck>
+                <S.IdCheck
+                  type="button"
+                  onClick={async (e) => {
+                    const { data: payload } = await instance.get('/api/v1/join/check', {
+                      params: { username: getValues('username') },
+                    })
+
+                    const isExistUsername = !!payload.data
+
+                    if (isExistUsername) {
+                      return setCheckUsernameMessage((prev) => ({
+                        ...prev,
+                        isSubmited: true,
+                        type: 'fail',
+                        message: '중복되는 username 입니다.',
+                      }))
+                    }
+
+                    setCheckUsernameMessage((prev) => ({
+                      ...prev,
+                      isSubmited: true,
+                      type: 'success',
+                      message: '사용가능한 username입니다.',
+                    }))
+                  }}
+                >
+                  중복확인
+                </S.IdCheck>
               </div>
               {errors?.username ? <span style={{ color: 'red' }}>{errors?.username.message as string}</span> : null}
+              {checkUsernameMessage.isSubmited ? (
+                <span style={{ color: checkUsernameMessage.type === 'success' ? 'green' : 'red' }}>
+                  {checkUsernameMessage.message}
+                </span>
+              ) : null}
               <div style={{ display: 'flex', alignItems: 'center', gap: '20px', padding: '5px 5px 5px 19px' }}>
                 <label htmlFor="name" style={{ fontWeight: '600', minWidth: '27.4px' }}>
                   이름
@@ -276,20 +399,19 @@ function SignupForm() {
                 <label htmlFor="email" style={{ fontWeight: '600', minWidth: '42px' }}>
                   프로필사진
                 </label>
-                <TextField
+                {/* <TextField
                   id="email"
                   variant="outlined"
                   size="small"
                   {...register('email', {
                     required: '이메일은 필수 입력항목입니다',
-
                     pattern: { value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/, message: '올바른 email형식이 아닙니다' },
                   })}
                   sx={{
                     width: '380px',
                     backgroundColor: theme.app.palette.white,
                   }}
-                />
+                /> */}
 
                 <Button
                   variant="contained"
@@ -301,10 +423,13 @@ function SignupForm() {
                     hidden
                     accept="image/*"
                     type="file"
+                    {...register('fileName')}
                     onChange={(e) => {
                       if (previewURL) URL.revokeObjectURL(previewURL)
 
                       const file = e.target.files?.item(0)
+
+                      setValue('fileName', file)
 
                       const url = URL.createObjectURL(file as Blob)
 
