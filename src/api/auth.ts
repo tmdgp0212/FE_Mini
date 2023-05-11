@@ -4,8 +4,8 @@ import { API_URL } from './constants'
 import { instance } from './instance'
 
 export const login = async (loginForm: LoginRequestDto) => {
-  const res = await instance.post<ApiResponse>(API_URL.v1.login, {
-    email: loginForm.email,
+  const res = await instance.post<ApiResponse>('http://52.78.232.110:9090' + API_URL.v1.login, {
+    username: loginForm.email,
     password: loginForm.password,
   })
 

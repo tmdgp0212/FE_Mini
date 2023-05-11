@@ -8,12 +8,23 @@ import EventWrapper from './EventWrapper'
 import * as S from './style'
 import dayjs from 'dayjs'
 import { VacationEntity, VacationStatus } from '../../types/vacation'
+import { useQuery } from '@tanstack/react-query'
+import { instance } from '../../api/instance'
 
 export interface CostomEvent extends Event {
   type: string
 }
 
+//headers: {
+//   Authorization:
+//   'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKV1QiLCJpbWFnZSI6IjQwNC5qcGciLCJyb2xlIjoiQURNSU4iLCJuYW1lIjoi6rmA64-F7J6QIiwicG9zaXRpb24iOiLqs7zsnqUiLCJleHAiOjE2ODYzNzEwNjEsImRlcGFydG1lbnQiOiLqsJzrsJwiLCJpYXQiOjE2ODM3NzkwNjEsInVzZXJuYW1lIjoiYWRtaW40In0.ADlhVUmqLzy46MjD-YdPgk5ssuhZ8xpzAZIO-d1FPaIw6aytulQz7uNcUYTtbyJwWX-S_TeZgS7POQn_NlOA8g',
+// },
+
 function BigCalendar() {
+  instance.get('http://52.78.232.110:9090' + '/api/v1/vacation/list').then((res) => {
+    console.log(res)
+  })
+
   const tmpEvents: VacationEntity[] = [
     {
       id: 1,

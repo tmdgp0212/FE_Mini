@@ -34,20 +34,20 @@ function handleRequest(req: InternalAxiosRequestConfig<any>) {
 }
 
 function handleResponse(res: AxiosResponse<any, any>) {
-  if (res.config.url === API_URL.v1.login) {
-    const { accessToken, refreshToken } = getTokensFromResponse(res)
+  if (res.config.url === 'http://52.78.232.110:9090' + API_URL.v1.login) {
+    const { accessToken } = getTokensFromResponse(res)
 
     const decodedAccessToken = jwtDecode(accessToken)
-    const decodedRefreshToken = jwtDecode(refreshToken)
+    // const decodedRefreshToken = jwtDecode(refreshToken)
 
     setCookie('accessToken', accessToken, {
       path: '/',
       maxAge: Number(decodedAccessToken?.exp) - Number(decodedAccessToken?.iat),
     })
-    setCookie('refreshToken', refreshToken, {
-      path: '/',
-      maxAge: Number(decodedRefreshToken?.exp) - Number(decodedRefreshToken?.iat),
-    })
+    // setCookie('refreshToken', refreshToken, {
+    //   path: '/',
+    //   maxAge: Number(decodedRefreshToken?.exp) - Number(decodedRefreshToken?.iat),
+    // })
   }
 
   return res
