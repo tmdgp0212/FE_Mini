@@ -7,8 +7,8 @@ export const registrationDepartment = async (department: DepartmentRegisterReq) 
   return res.data
 }
 
-export const editDepartment = async ({ name, vacation }: DepartmentEditReq) => {
-  const res = await instance.post(`/api/v1/department/modify/${name}`, { vacationLimit: vacation })
+export const editDepartment = async ({ departmentName, vacationLimit }: DepartmentEditReq) => {
+  const res = await instance.post(`/api/v1/department/modify/${departmentName}`, { vacationLimit })
   console.log(res)
   return res.data
 }

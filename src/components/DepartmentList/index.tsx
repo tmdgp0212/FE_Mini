@@ -30,8 +30,8 @@ function DepartmentList() {
   const { mutate: modifyMutate } = useMutation((department: DepartmentEditReq) => editDepartment(department))
   const { mutate: deleteMutate } = useMutation((departmentName: string) => deleteDepartment(departmentName))
 
-  const onEdit = (name: string, vacation: number) => {
-    modifyMutate({ name, vacation })
+  const onEdit = (departmentName: string, vacationLimit: number) => {
+    modifyMutate({ departmentName, vacationLimit })
   }
 
   const onDelete = (departmentName: string) => {

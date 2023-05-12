@@ -34,8 +34,8 @@ export interface DepartmentRegisterReq {
 }
 
 export interface DepartmentEditReq {
-  name: string
-  vacation: number
+  departmentName: string
+  vacationLimit: number
   // departmentPersonal: number
 }
 
@@ -47,6 +47,6 @@ export interface PositionRegisterReq {
 }
 
 export interface PositionEditReq {
-  name: string
+  positionName: string
   vacation: number
 }

@@ -27,8 +27,8 @@ function PositionList() {
   const { mutate: modifyMutate } = useMutation((position: PositionEditReq) => editPosition(position))
   const { mutate: deleteMutate } = useMutation((positionName: string) => deletePosition(positionName))
 
-  const onEdit = (name: string, vacation: number) => {
-    modifyMutate({ name, vacation })
+  const onEdit = (positionName: string, vacation: number) => {
+    modifyMutate({ positionName, vacation })
   }
 
   const onDelete = (positionName: string) => {

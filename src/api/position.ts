@@ -19,8 +19,8 @@ export const getPosition = async (positionName: string) => {
   return res.data
 }
 
-export const editPosition = async ({ name, vacation }: PositionEditReq) => {
-  const res = await instance.post(`/api/v1/position/modify/${name}`, { vacation })
+export const editPosition = async ({ positionName, vacation }: PositionEditReq) => {
+  const res = await instance.post(`/api/v1/position/modify/${positionName}`, { vacation })
   console.log(res)
   return res.data
 }

@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { DepartmentEditReq } from '../../api/type'
 import { DepartmentEntity } from '../../types/department'
 
 interface DepartmentItemProps {
   department: DepartmentEntity
-  onEdit: (name: string, vacation: number) => void
+  onEdit: (departmentName: string, vacationLimit: number) => void
   onDelete: (departmentName: string) => void
 }
 

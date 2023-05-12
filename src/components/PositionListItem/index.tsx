@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import { PositionEntity } from '../../types/position'
-import { PositionEditReq } from '../../api/type'
 
 interface PositionItemProps {
   position: PositionEntity
-  onEdit: (name: string, vacation: number) => void
+  onEdit: (positionName: string, vacation: number) => void
   onDelete: (positionName: string) => void
 }
 

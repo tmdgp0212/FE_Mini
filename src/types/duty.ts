@@ -1,9 +1,9 @@
 export interface DutyEntity {
   id: number
-  name: string
+  memberName: string
   day: string
-  deleted: boolean
   status: DutyStatus
+  departmentName: string
 }
 
 export enum DutyStatus {

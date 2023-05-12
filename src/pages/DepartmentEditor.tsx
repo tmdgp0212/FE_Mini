@@ -6,9 +6,10 @@ import AddPositionForm from '../components/AddPositionForm'
 import DepartmentList from '../components/DepartmentList'
 import Title from '../components/Title'
 
+const tmp = { departmentName: '영업', vacationLimit: 3 }
+
 function DepartmentEditor() {
   const [inputValue, setInputValue] = useState({ name: '', vacation: 1 })
-  const tmp = { departmentName: '영업', vacationLimit: 3 }
   const { mutate } = useMutation((department: DepartmentRegisterReq) => registrationDepartment(tmp))
 
   const clickAddPosition = () => {
