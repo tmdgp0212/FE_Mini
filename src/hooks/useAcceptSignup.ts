@@ -10,7 +10,7 @@ export const useAcceptSignup = (Accept: boolean) => {
   const { mutate } = useMutation(post, {
     onSuccess: (data) => {
       console.log(data)
-      navigate('/admin/signup')
+      // navigate('/admin/signup')
     },
     onError: (err: AxiosError) => {
       console.log(err)

@@ -10,6 +10,7 @@ function UserRegisterControl() {
   const AcceptFunc = useAcceptSignup(true)
   const RejectFunc = useAcceptSignup(false)
   const getSignUp = useGetSignUp()
+  console.log(getSignUp)
   const [checkItems, setCheckItems] = useState<string[]>([])
 
   const checkedItemHandler = (id: string, isChecked: boolean) => {
@@ -29,6 +30,7 @@ function UserRegisterControl() {
       setCheckItems([])
     }
   }
+
   return (
     <>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -45,8 +47,8 @@ function UserRegisterControl() {
           checkItems={checkItems}
           PositiveMsg="승인"
           NegativeMsg="거부"
-          acceptFunc={AcceptFunc}
-          rejectFunc={RejectFunc}
+          acceptFunc={() => AcceptFunc}
+          rejectFunc={() => RejectFunc}
         />
       </div>
       <S.Container>

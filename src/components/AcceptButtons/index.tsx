@@ -24,6 +24,7 @@ function AcceptButtons({
   const [open, setOpen] = useState(false)
 
   const handleClose = () => setOpen(false)
+
   const handleClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLButtonElement
     if (checkItems.length === 0) {
@@ -33,6 +34,7 @@ function AcceptButtons({
       setOpen(true)
     }
   }
+
   return (
     <>
       <S.ButtonContainer>

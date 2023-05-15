@@ -10,7 +10,7 @@ export const useAcceptDuty = (Accept: boolean) => {
   const { mutate } = useMutation(post, {
     onSuccess: (data) => {
       console.log(data)
-      navigate('/admin/vacation')
+      // navigate('/admin/vacation')
     },
     onError: (err: AxiosError) => {
       console.log(err)

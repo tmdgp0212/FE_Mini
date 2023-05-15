@@ -11,6 +11,7 @@ import { useGetVacation } from '../../hooks/useGetVacation'
 
 export const testUser = [
   {
+    username: 'lbw',
     name: '이병욱',
     employeeNumber: '2023050401',
     department: '개발2팀',
@@ -20,6 +21,7 @@ export const testUser = [
     email: 'lbw@test.com',
   },
   {
+    username: 'ods',
     name: '오대성',
     employeeNumber: '2022121101',
     department: '개발1팀',
@@ -29,6 +31,7 @@ export const testUser = [
     email: 'ods@test.com',
   },
   {
+    username: 'csh',
     name: '조승혜',
     employeeNumber: '2019082801',
     department: '개발1팀',
@@ -38,6 +41,7 @@ export const testUser = [
     email: 'csh@test.com',
   },
   {
+    username: 'jsh',
     name: '정석화',
     employeeNumber: '2013012801',
     department: '개발본부',
@@ -47,6 +51,7 @@ export const testUser = [
     email: 'jsh@test.com',
   },
   {
+    username: 'lhw',
     name: '이혜원',
     employeeNumber: '2015030201',
     department: '개발2팀',
