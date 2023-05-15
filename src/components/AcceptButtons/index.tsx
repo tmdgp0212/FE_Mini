@@ -41,7 +41,7 @@ function AcceptButtons({
         <Button
           id="Accept"
           bg={theme.app.palette.green1}
-          fontColor={theme.app.palette.white}
+          fontcolor={theme.app.palette.white}
           sx={{ width: '150px' }}
           onClick={handleClick}
         >
@@ -50,7 +50,7 @@ function AcceptButtons({
         <Button
           id="Reject"
           bg={theme.app.palette.red}
-          fontColor={theme.app.palette.white}
+          fontcolor={theme.app.palette.white}
           sx={{ width: '150px' }}
           onClick={handleClick}
         >
