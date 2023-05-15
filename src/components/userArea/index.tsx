@@ -1,5 +1,4 @@
 import React from 'react'
-import styled from '@emotion/styled'
 import Avatar from '@mui/material/Avatar'
 import { UserPayload } from '../../types/user'
 import { LoginForm } from '../Form'
@@ -10,11 +9,6 @@ interface UserAreaProps {
   user?: UserPayload | null
 }
 
-const StyledLink = styled(Link)`
-  text-decoration: none;
-  color: ${({ theme }) => theme.app.palette.black};
-`
-
 function UserArea({ user }: UserAreaProps) {
   return user ? (
     <S.AvatarWrapper>
@@ -22,7 +16,7 @@ function UserArea({ user }: UserAreaProps) {
       <S.UserInfo>
         <div>{user.name}</div>
         <S.DepartmentAndPosition>
-          {user.department} ({user.position})
+          {user.departmentName}팀 ({user.positionName})
         </S.DepartmentAndPosition>
       </S.UserInfo>
     </S.AvatarWrapper>

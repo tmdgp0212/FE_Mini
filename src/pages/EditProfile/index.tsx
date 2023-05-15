@@ -32,27 +32,6 @@ async function fetchUser() {
 }
 
 async function modifyMyInfo({ name, email, fileName, phoneNumber, oldPassword, newPassword }: ModifyForm) {
-  const { status, data } = await instance.post(
-    '/api/v1/member/modify',
-    {
-      name,
-      email,
-      oldPassword,
-      newPassword,
-      phoneNumber,
-    },
-    {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-      },
-    },
-  )
-
-  if (status !== 200) {
-    throw new Error('')
-  }
-
   if (fileName) {
     const upload = new FormData()
     upload.append('fileNames', fileName[0])
@@ -100,8 +79,31 @@ async function modifyMyInfo({ name, email, fileName, phoneNumber, oldPassword, n
       throw new Error('')
     }
 
-    return
+    return data
   }
+
+  const { status, data } = await instance.post(
+    '/api/v1/member/modify',
+    {
+      name,
+      email,
+      oldPassword,
+      newPassword,
+      phoneNumber,
+    },
+    {
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+    },
+  )
+
+  if (status !== 200) {
+    throw new Error('')
+  }
+
+  return data
 }
 
 function EditProfile() {
@@ -211,8 +213,8 @@ function EditProfile() {
             <S.Detail>{user.phoneNumber}</S.Detail>
           </S.UserDetailContainer>
           <S.UserCompanyDetail>
-            <S.Detail>사번:{user.employeeNumber}</S.Detail>
-            <S.Detail>부서:{user.department}</S.Detail>
+            <S.Detail>사번:{user.empolyeeNumber}</S.Detail>
+            <S.Detail>부서:{user.departmentName}</S.Detail>
             <S.Detail>직급:{user.positionName}</S.Detail>
             <S.Detail>
               입사일(근속연수):{user.joiningDay}({user.years}년)
@@ -382,10 +384,10 @@ function EditProfile() {
             </form>
             <S.Notice>아래 정보 수정은 관리자 권한입니다</S.Notice>
             <S.UserCompanyDetail>
-              <S.Detail>사번:{user.employeeNumber}</S.Detail>
-              <S.Detail>부서:{user.department}</S.Detail>
+              <S.Detail>사번:{user.empolyeeNumber}</S.Detail>
+              <S.Detail>부서:{user.departmentName}</S.Detail>
 
-              <S.Detail>직급:{user.position}</S.Detail>
+              <S.Detail>직급:{user.positionName}</S.Detail>
               <S.Detail>
                 입사일(근속연수):{user.startDate}({user.years}년)
               </S.Detail>

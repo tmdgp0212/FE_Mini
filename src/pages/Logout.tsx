@@ -28,7 +28,6 @@ function Logout() {
 
     return () => {
       removeCookie('accessToken', { path: '/' })
-      removeCookie('refreshToken', { path: '/' })
 
       dispatch(setUser(null))
     }
