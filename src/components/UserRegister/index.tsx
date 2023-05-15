@@ -1,6 +1,6 @@
 import * as S from './style'
 import IconHuman from '../../assets/man.png'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 interface RegisterUser {
   name: string
@@ -20,6 +20,7 @@ function UserRegister({
   checkItems: string[]
   checkItemHandler: (id: string, checked: boolean) => void
 }) {
+  const ContainerRef = useRef<HTMLInputElement>(null)
   const [isClicked, setIsClicked] = useState(false)
 
   const onCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,14 +28,16 @@ function UserRegister({
     setIsClicked(e.target.checked)
   }
 
+  const handleClick = () => {
+    if (ContainerRef.current) {
+      ContainerRef.current.click()
+    }
+  }
+
   useEffect(() => {
     setIsClicked(checkItems.includes(user.employeeNumber))
   }, [checkItems])
 
-  const handleClick = (e: React.MouseEvent) => {
-    const El = e.currentTarget as HTMLDivElement
-    El?.querySelector('input').click()
-  }
   return (
     <S.Container onClick={handleClick}>
       <input
@@ -43,6 +46,7 @@ function UserRegister({
         checked={isClicked}
         value={user.employeeNumber}
         onChange={(e) => onCheck(e)}
+        ref={ContainerRef}
       />
       <img src={IconHuman} alt="사용자" />
       <S.UserInfo>
