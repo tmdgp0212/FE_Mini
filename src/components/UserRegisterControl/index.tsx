@@ -9,8 +9,7 @@ import { useGetSignUp } from '../../hooks/useGetSignUp'
 function UserRegisterControl() {
   const AcceptFunc = useAcceptSignup(true)
   const RejectFunc = useAcceptSignup(false)
-  const getSignUp = useGetSignUp()
-  console.log(getSignUp)
+  const deActivativeUser = useGetSignUp()
   const [checkItems, setCheckItems] = useState<string[]>([])
 
   const checkedItemHandler = (id: string, isChecked: boolean) => {
@@ -24,7 +23,7 @@ function UserRegisterControl() {
   const onCheckAll = (checked: boolean) => {
     if (checked) {
       const idArray: string[] = []
-      testUser.forEach((item) => idArray.push(item.employeeNumber))
+      testUser.forEach((item) => idArray.push(item.username))
       setCheckItems(idArray)
     } else {
       setCheckItems([])
@@ -47,19 +46,21 @@ function UserRegisterControl() {
           checkItems={checkItems}
           PositiveMsg="승인"
           NegativeMsg="거부"
-          acceptFunc={() => AcceptFunc}
-          rejectFunc={() => RejectFunc}
+          acceptFunc={AcceptFunc}
+          rejectFunc={RejectFunc}
         />
       </div>
       <S.Container>
-        {testUser.map((user) => (
-          <UserRegister
-            key={user.employeeNumber}
-            user={user}
-            checkItems={checkItems}
-            checkItemHandler={checkedItemHandler}
-          />
-        ))}
+        {!deActivativeUser.signup?.data.empty
+          ? deActivativeUser.signup?.data.content.map((user) => (
+              <UserRegister
+                key={user.employeeNumber}
+                user={user}
+                checkItems={checkItems}
+                checkItemHandler={checkedItemHandler}
+              />
+            ))
+          : ''}
       </S.Container>
     </>
   )

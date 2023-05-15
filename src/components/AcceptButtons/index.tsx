@@ -2,7 +2,7 @@ import * as S from './style'
 import { useTheme } from '@mui/material'
 import Button from '../Button'
 import AcceptModal from '../AcceptModal'
-import React, { BaseSyntheticEvent, useState } from 'react'
+import React, { useState } from 'react'
 import { useToast } from '../../hooks'
 
 function AcceptButtons({
@@ -41,7 +41,7 @@ function AcceptButtons({
         <Button
           id="Accept"
           bg={theme.app.palette.green1}
-          fontColor={theme.app.palette.white}
+          fontcolor={theme.app.palette.white}
           sx={{ width: '150px' }}
           onClick={handleClick}
         >
@@ -50,7 +50,7 @@ function AcceptButtons({
         <Button
           id="Reject"
           bg={theme.app.palette.red}
-          fontColor={theme.app.palette.white}
+          fontcolor={theme.app.palette.white}
           sx={{ width: '150px' }}
           onClick={handleClick}
         >
