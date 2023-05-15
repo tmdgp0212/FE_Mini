@@ -1,14 +1,4 @@
 import BigCalendar from '../components/Calendar/BigCalendar'
-<<<<<<< HEAD
-import Title from '../components/Title'
-
-function Home() {
-  return (
-    <div>
-      <Title text="전체 일정" />
-      <BigCalendar />
-    </div>
-=======
 import { useEffect, useState } from 'react'
 import { VacationEntity } from '../types/vacation'
 import { useMutation } from '@tanstack/react-query'
@@ -146,7 +136,6 @@ function Home() {
         </Modal>
       )}
     </>
->>>>>>> 271d6a22964a34eeef2e58b7ec0075f78fcaf803
   )
 }
 

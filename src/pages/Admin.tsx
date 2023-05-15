@@ -6,8 +6,6 @@ import { useAccessTokenInfo } from '../store/slices/userSlice'
 function Admin() {
   const { user } = useAccessTokenInfo()
 
-  console.log('payload', user.userPayload)
-
   return user.userPayload ? (
     UserRole[user.userPayload.role] === UserRole.ADMIN ? (
       <Outlet />

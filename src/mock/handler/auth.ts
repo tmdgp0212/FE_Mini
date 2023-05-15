@@ -5,9 +5,9 @@ import { registerAccessToken, registerRefreshToken } from '../../util/jwt'
 
 export const authHandler = [
   rest.post(API_URL.v1.login, async (req, res, ctx) => {
-    const { email, password } = await req.json()
+    const { username, password } = await req.json()
 
-    if (!(email && password)) {
+    if (!(username && password)) {
       return res(
         ctx.status(401),
         ctx.json({
@@ -18,7 +18,7 @@ export const authHandler = [
       )
     }
 
-    const user = mockUserList.find((user) => user.email === email)
+    const user = mockUserList.find((user) => user.username === username)
 
     if (!user)
       return res(

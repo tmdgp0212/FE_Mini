@@ -44,18 +44,6 @@ function Layout() {
               { title: '내 연차/당직 관리', to: '/user/vacation' },
             ]}
           />
-<<<<<<< HEAD
-          <NestedNav
-            mainTitle="admin"
-            mainIcon={<GrUserAdmin />}
-            menuInfoList={[
-              { title: '연차/당직 신청내역보기', to: '/admin/vacation' },
-              { title: '회원가입 신청내역보기', to: '/admin/signup' },
-              { title: '유저 정보 수정', to: '/admin/user' },
-            ]}
-            isAuth={!!user?.userPayload && UserRole[user.userPayload.role] === UserRole.ADMIN}
-          />
-=======
           {user?.role === UserRole.ADMIN ? (
             <>
               <NestedNav
@@ -73,7 +61,6 @@ function Layout() {
           ) : (
             <></>
           )}
->>>>>>> 271d6a22964a34eeef2e58b7ec0075f78fcaf803
         </S.NavGroup>
         {user?.userPayload ? (
           <S.NavItem to="/logout">
