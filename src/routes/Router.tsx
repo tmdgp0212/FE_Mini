@@ -11,7 +11,9 @@ import {
   ScheduleControl,
   DepartmentEditor,
   PositionEditor,
+  EditProfile,
 } from '../pages'
+import RequestVacation from '../pages/RequestVacation'
 import ProtectedRouter from './ProtectedRouter'
 
 function Router() {
@@ -21,8 +23,8 @@ function Router() {
         <Route element={<ProtectedRouter />}>
           <Route path="/" element={<Home />} />
           <Route path="/user" element={<User />}>
-            <Route path="mypage" element={<>내 정보 수정</>} />
-            <Route path="vacation" element={<>내 연차/당직 관리</>} />
+            <Route path="mypage" element={<EditProfile />} />
+            <Route path="vacation" element={<RequestVacation />} />
           </Route>
           <Route path="/admin" element={<Admin />}>
             <Route path="vacation" element={<ScheduleControl />} />
