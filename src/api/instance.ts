@@ -7,9 +7,9 @@ import { jwtDecode } from '../util/jwt'
 const getInstance = () => {
   const instance = axios.create({
     baseURL: import.meta.env.VITE_MOCKING_ENABLE === 'true' ? '' : import.meta.env.VITE_SERVER_URL,
-    // headers: {
-    //   Authorization: ''
-    // },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     withCredentials: true,
   })
 
@@ -34,6 +34,9 @@ function handleRequest(req: InternalAxiosRequestConfig<any>) {
     req.headers['Authorization'] = `Bearer ${accessToken}`
   }
 
+  // req.headers[
+  //   'Authorization'
+  // ] = `Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKV1QiLCJpbWFnZSI6IjQwNC5qcGciLCJyb2xlIjoiQURNSU4iLCJuYW1lIjoi6rmA64-F7J6QIiwicG9zaXRpb24iOiLqs7zsnqUiLCJleHAiOjE2ODYzNzEwNjEsImRlcGFydG1lbnQiOiLqsJzrsJwiLCJpYXQiOjE2ODM3NzkwNjEsInVzZXJuYW1lIjoiYWRtaW40In0.ADlhVUmqLzy46MjD-YdPgk5ssuhZ8xpzAZIO-d1FPaIw6aytulQz7uNcUYTtbyJwWX-S_TeZgS7POQn_NlOA8g`
   return req
 }
 

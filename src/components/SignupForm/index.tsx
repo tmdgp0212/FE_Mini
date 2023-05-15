@@ -65,13 +65,15 @@ function SignupForm() {
       joiningDay,
     } = data
 
-    if (fileName.name) {
+    if (fileName) {
       const tempUploadFormData = new FormData()
+
+      console.log({ fileName })
 
       tempUploadFormData.append('fileNames', fileName)
 
       const { data: tempUploadResponse } = await instance.post(
-        'http://52.78.232.110:9090' + '/api/v1/temp/upload',
+        '/api/v1/temp/upload',
         { fileNames: tempUploadFormData.get('fileNames') },
         {
           headers: {
@@ -92,7 +94,7 @@ function SignupForm() {
       // signupFormData.append('birthDate', dayjsInstance(birthDate).format('YYYY-MM-DD'))
       // signupFormData.append('joiningDay', dayjsInstance(joiningDay).format('YYYY-MM-DD'))
 
-      const { data: signupResponse } = await instance.post('http://52.78.232.110:9090' + '/api/v1/join', {
+      const { data: signupResponse } = await instance.post('/api/v1/join', {
         username,
         password,
         fileName: tempUploadResponse.data,
@@ -110,7 +112,7 @@ function SignupForm() {
       return
     }
 
-    const { data: signupResponse } = await instance.post('http://52.78.232.110:9090' + '/api/v1/join', {
+    const { data: signupResponse } = await instance.post('/api/v1/join', {
       username,
       password,
       departmentName,
@@ -254,7 +256,7 @@ function SignupForm() {
                     clearErrors('username')
                     const username = getValues('username')
 
-                    const { data: payload } = await instance.get('http://52.78.232.110:9090' + '/api/v1/join/check', {
+                    const { data: payload } = await instance.get('/api/v1/join/check', {
                       params: { username: getValues('username') },
                     })
 
