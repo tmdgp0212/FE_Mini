@@ -2,17 +2,17 @@ import { instance } from './instance'
 import { SearchUserReq, RoleMutateReq, ModifyUserReq } from './type'
 
 export const getVacation = async () => {
-  const res = await instance.get(`/vacation/list/0`)
+  const res = await instance.get(`/api/v1/vacation/list/0`)
   return res.data
 }
 
 export const getDuty = async () => {
-  const res = await instance.get(`/duty/list/0`)
+  const res = await instance.get(`/api/v1/duty/list/0`)
   return res.data
 }
 
 export const acceptVacation = async (id: string) => {
-  const res = await instance.post(`/vacation/ok/${id}`)
+  const res = await instance.post(`/api/v1/vacation/ok/${id}`)
   return res.data
 }
 
@@ -38,13 +38,13 @@ export const getSignUp = async () => {
 
 export const acceptSignUp = async (username: string) => {
   console.log('Accept SignUp : ', username)
-  // const res = await instance.post(`/member/admin/active`, { username, memberStatus: 'ACTIVATION' })
-  // return res.data
+  const res = await instance.post(`/api/v1/member/admin/active`, { username, memberStatus: 'ACTIVATION' })
+  return res.data
 }
 export const rejectSignUp = async (username: string) => {
   console.log('Reject SignUp : ', username)
-  // const res = await instance.post(`/member/admin/active`, { username, memberStatus: 'DEACTIVATION' })
-  // return res.data
+  const res = await instance.post(`/api/v1/member/admin/active`, { username, memberStatus: 'DEACTIVATION' })
+  return res.data
 }
 
 export const changeRole = async (data: RoleMutateReq) => {

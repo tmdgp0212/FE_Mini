@@ -1,23 +1,14 @@
 import * as S from './style'
 import IconHuman from '../../assets/man.png'
 import { useEffect, useState, useRef } from 'react'
-import { Avatar } from '@mui/material'
-
-interface RegisterUser {
-  name: string
-  email: string
-  employeeNumber: string
-  department: string
-  position: string
-  joinDate: string
-}
+import { DeActivatedContent } from '../../hooks/useGetSignUp'
 
 function UserRegister({
   user,
   checkItems,
   checkItemHandler,
 }: {
-  user: RegisterUser
+  user: DeActivatedContent
   checkItems: string[]
   checkItemHandler: (id: string, checked: boolean) => void
 }) {
@@ -37,7 +28,7 @@ function UserRegister({
   }
 
   useEffect(() => {
-    setIsClicked(checkItems.includes(user.employeeNumber))
+    setIsClicked(checkItems.includes(user.username))
   }, [checkItems])
 
   return (
@@ -46,7 +37,7 @@ function UserRegister({
         type="checkbox"
         name={`select-${user.employeeNumber}`}
         checked={isClicked}
-        value={user.employeeNumber}
+        value={user.username}
         onChange={(e) => onCheck(e)}
         ref={ContainerRef}
       />

@@ -65,7 +65,7 @@ function SignupForm() {
       joiningDay,
     } = data
 
-    if (fileName) {
+    if (fileName && fileName.length >= 1) {
       const tempUploadFormData = new FormData()
 
       console.log({ fileName })
