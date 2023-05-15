@@ -1,15 +1,14 @@
 export interface UserEntity {
   username: string
   birthDate: string
-  deleted?: boolean
   email: string
+  password?: string
   employeeNumber: string
   departmentName: string
   positionName: string
   name: string
   joiningDay: string
   years: number
-  password?: string
   phoneNumber: string
   fileName?: string
   role: UserRole
@@ -18,7 +17,7 @@ export interface UserEntity {
 
 export interface User {
   username: string
-  password: string
+  password?: string
   name: string
   email: string
   role: UserRole
@@ -27,11 +26,9 @@ export interface User {
   birthDate: string
   joiningDay: string
   years: number
-  department?: string
-  position?: string
+  departmentName: string
+  positionName: string
   fileName?: string
-  updatedAt?: string
-  createdAt?: string
 }
 
 export interface SearchedUser {
@@ -48,8 +45,8 @@ export interface UserPayload {
   username: string
   name?: string
   role: keyof typeof UserRole
-  department: string
-  position: string
+  departmentName: string
+  positionName: string
   fileName?: string
 }
 

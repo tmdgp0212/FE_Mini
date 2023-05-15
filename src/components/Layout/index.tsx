@@ -16,10 +16,9 @@ function Layout() {
   const { user, dispatch } = useAccessTokenInfo()
 
   const accessToken = getCookie('accessToken')
-  const refreshToken = getCookie('refrehToken')
 
-  if ((accessToken || refreshToken) && !user.userPayload) {
-    dispatch(setUser(jwtDecode(accessToken || refreshToken) as UserActionPayload))
+  if (accessToken && !user.userPayload) {
+    dispatch(setUser(jwtDecode(accessToken) as UserActionPayload))
   }
 
   return (
