@@ -1,22 +1,14 @@
 import * as S from './style'
 import IconHuman from '../../assets/man.png'
 import { useEffect, useState, useRef } from 'react'
-
-interface RegisterUser {
-  name: string
-  email: string
-  employeeNumber: string
-  department: string
-  position: string
-  joinDate: string
-}
+import { DeActivatedContent } from '../../hooks/useGetSignUp'
 
 function UserRegister({
   user,
   checkItems,
   checkItemHandler,
 }: {
-  user: RegisterUser
+  user: DeActivatedContent
   checkItems: string[]
   checkItemHandler: (id: string, checked: boolean) => void
 }) {
@@ -35,7 +27,7 @@ function UserRegister({
   }
 
   useEffect(() => {
-    setIsClicked(checkItems.includes(user.employeeNumber))
+    setIsClicked(checkItems.includes(user.username))
   }, [checkItems])
 
   return (
@@ -44,7 +36,7 @@ function UserRegister({
         type="checkbox"
         name={`select-${user.employeeNumber}`}
         checked={isClicked}
-        value={user.employeeNumber}
+        value={user.username}
         onChange={(e) => onCheck(e)}
         ref={ContainerRef}
       />
@@ -55,10 +47,10 @@ function UserRegister({
       </S.UserInfo>
       <S.UserDetail>
         <div className="employeeNum">사번 : {user.employeeNumber}</div>
-        <div className="department">부서 : {user.department}</div>
-        <div className="position">직급 : {user.position}</div>
+        <div className="department">부서 : {user.departmentName}</div>
+        <div className="position">직급 : {user.positionName}</div>
         <div className="joinDate">
-          입사일(근속연수): {user.joinDate} ({getYearsOfService(user.joinDate)}년)
+          입사일(근속연수): {user.joiningDay} ({getYearsOfService(user.joiningDay)}년)
         </div>
       </S.UserDetail>
     </S.Container>
