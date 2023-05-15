@@ -5,6 +5,16 @@ export interface Vacation {
   start: string
   end: string
   status: VacationStatus
+  createdAt?: string
+}
+
+export interface Duty {
+  id: number
+  membername: string
+  day: string
+  status: VacationStatus
+  departmentName: string
+  createdAt: string
 }
 
 export enum VacationStatus {
