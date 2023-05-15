@@ -6,12 +6,16 @@ import { jwtDecode } from '../util/jwt'
 
 const getInstance = () => {
   const instance = axios.create({
+    baseURL: 'http://52.78.232.110:9090/',
+    // headers: {
+    //   Authorization: ''
+    // },
     withCredentials: true,
   })
 
   const TIMEOUTERROR_MESSAGE = 'timeout'
 
-  instance.defaults.timeout = 5000
+  // instance.defaults.timeout = 5000
   instance.defaults.timeoutErrorMessage = TIMEOUTERROR_MESSAGE
 
   instance.interceptors.request.use(handleRequest)

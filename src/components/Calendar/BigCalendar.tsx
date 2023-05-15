@@ -1,20 +1,28 @@
 import 'react-big-calendar/lib/css/react-big-calendar.css'
-import { Calendar, dayjsLocalizer, NavigateAction, Event } from 'react-big-calendar'
-import { dayjsInstance } from '../../util'
-import { useMutation } from '@tanstack/react-query'
-import { useEffect, useState } from 'react'
+import { Calendar } from 'react-big-calendar'
+import { createCalendarEvent } from '../../util'
+import { CustomEvent } from '../../pages/Home'
+import { DateLocalizer } from 'react-big-calendar'
 import Toolbar from './Toolbar'
-import EventWrapper from './EventWrapper'
 import * as S from './style'
+<<<<<<< HEAD
 import dayjs from 'dayjs'
 import { VacationEntity, VacationStatus } from '../../types/vacation'
 import { useQuery } from '@tanstack/react-query'
 import { instance } from '../../api/instance'
+=======
+>>>>>>> 271d6a22964a34eeef2e58b7ec0075f78fcaf803
 
-export interface CostomEvent extends Event {
-  type: string
-}
+// const tmpEvents = [
+//   createCalendarEvent({ id: 1, title: '김아무(개발)', start: '2023-05-01', end: '2023-05-01', type: 'duty' }),
+//   createCalendarEvent({ id: 2, title: '박아무(영업)', start: '2023-05-09', end: '2023-05-09', type: 'duty' }),
+//   createCalendarEvent({ id: 3, title: '광아무(영업)', start: '2023-05-23', end: '2023-05-23', type: 'duty' }),
+//   createCalendarEvent({ id: 4, title: '조아무(인사)', start: '2023-05-04', end: '2023-05-06', type: 'vacation' }),
+//   createCalendarEvent({ id: 5, title: '최아무(마케팅)', start: '2023-05-12', end: '2023-05-18', type: 'vacation' }),
+//   createCalendarEvent({ id: 6, title: '이아무(마케팅)', start: '2023-05-20', end: '2023-05-22', type: 'vacation' }),
+// ]
 
+<<<<<<< HEAD
 //headers: {
 //   Authorization:
 //   'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJKV1QiLCJpbWFnZSI6IjQwNC5qcGciLCJyb2xlIjoiQURNSU4iLCJuYW1lIjoi6rmA64-F7J6QIiwicG9zaXRpb24iOiLqs7zsnqUiLCJleHAiOjE2ODYzNzEwNjEsImRlcGFydG1lbnQiOiLqsJzrsJwiLCJpYXQiOjE2ODM3NzkwNjEsInVzZXJuYW1lIjoiYWRtaW40In0.ADlhVUmqLzy46MjD-YdPgk5ssuhZ8xpzAZIO-d1FPaIw6aytulQz7uNcUYTtbyJwWX-S_TeZgS7POQn_NlOA8g',
@@ -95,20 +103,31 @@ function BigCalendar() {
       const formattedDate = dayjs(originDate).format('YYYY-MM-DD')
 
       await Promise.all([vacationMutate(formattedDate), dutyMutate(formattedDate)])
+=======
+interface BigCalendarProps {
+  localizer: DateLocalizer
+  vacations: CustomEvent[]
+  dutys: CustomEvent[]
+  eventPropGetter: (event: CustomEvent) => {
+    style: {
+      backgroundColor: string
+      border: string
+      color: string
+      borderRadius: string
+      outline: string
+>>>>>>> 271d6a22964a34eeef2e58b7ec0075f78fcaf803
     }
   }
+  onSelect: (event: CustomEvent) => void
+  onNavigate: (date: Date) => void
+}
 
-  useEffect(() => {
-    const formattedDate = dayjs(new Date()).format('YYYY-MM-DD')
-    vacationMutate(formattedDate)
-    dutyMutate(formattedDate)
-  }, [])
-
+function BigCalendar({ vacations, dutys, localizer, eventPropGetter, onSelect, onNavigate }: BigCalendarProps) {
   return (
     <S.CalendarContainer>
       <Calendar
         localizer={localizer}
-        events={vacations && dutys && ([...vacations, ...dutys] as CostomEvent[])}
+        events={vacations && dutys && ([...vacations, ...dutys] as CustomEvent[])}
         defaultView="month"
         culture={'ko'}
         views={{
@@ -122,8 +141,10 @@ function BigCalendar() {
         style={{ height: 600 }}
         components={{
           toolbar: (props) => <Toolbar {...props} />,
-          eventWrapper: EventWrapper,
+          // eventWrapper: EventWrapper,
         }}
+        eventPropGetter={(event) => eventPropGetter(event as CustomEvent)}
+        onSelectEvent={(event) => onSelect(event as CustomEvent)}
         onNavigate={onNavigate}
       />
     </S.CalendarContainer>
