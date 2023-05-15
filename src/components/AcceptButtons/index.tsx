@@ -2,7 +2,7 @@ import * as S from './style'
 import { useTheme } from '@mui/material'
 import Button from '../Button'
 import AcceptModal from '../AcceptModal'
-import React, { BaseSyntheticEvent, useState } from 'react'
+import React, { useState } from 'react'
 import { useToast } from '../../hooks'
 
 function AcceptButtons({
