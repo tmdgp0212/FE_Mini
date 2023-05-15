@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query'
 import { getSignUp } from '../api/admin'
 
 export const useGetSignUp = () => {
-  const { data: signup } = useQuery<any, unknown, DeactivatedUser, any>({ queryKey: ['signUp'], queryFn: getSignUp })
+  const { data: signup } = useQuery<any, unknown, DeActivatedUser, any>({ queryKey: ['signUp'], queryFn: getSignUp })
   return { signup }
 }
 
-export interface DeactivatedUser {
+export interface DeActivatedUser {
   data: {
     empty: boolean
     first: boolean
