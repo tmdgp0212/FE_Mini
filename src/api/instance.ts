@@ -37,14 +37,6 @@ function handleRequest(req: InternalAxiosRequestConfig<any>) {
   return req
 }
 
-<<<<<<< HEAD
-function handleResponse(res: AxiosResponse<any, any>) {
-  if (res.config.url === 'http://52.78.232.110:9090' + API_URL.v1.login) {
-    const { accessToken } = getTokensFromResponse(res)
-
-    const decodedAccessToken = jwtDecode(accessToken)
-    // const decodedRefreshToken = jwtDecode(refreshToken)
-=======
 async function handleResponse(res: AxiosResponse<any, any>) {
   if (res.config.url === API_URL.v1.login) {
     if (res.status === HttpStatusCode.Forbidden) {
@@ -55,19 +47,11 @@ async function handleResponse(res: AxiosResponse<any, any>) {
     const { accessToken } = getTokensFromResponse(res)
 
     const decodedAccessToken = jwtDecode(accessToken)
->>>>>>> 6a2bcb45096c1ede3b6b4545d7775aba5cb8b5db
 
     setCookie('accessToken', accessToken, {
       path: '/',
       maxAge: Number(decodedAccessToken?.exp) - Number(decodedAccessToken?.iat),
     })
-<<<<<<< HEAD
-    // setCookie('refreshToken', refreshToken, {
-    //   path: '/',
-    //   maxAge: Number(decodedRefreshToken?.exp) - Number(decodedRefreshToken?.iat),
-    // })
-=======
->>>>>>> 6a2bcb45096c1ede3b6b4545d7775aba5cb8b5db
   }
 
   return res

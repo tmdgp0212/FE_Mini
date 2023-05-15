@@ -43,7 +43,7 @@ function Layout() {
               { title: '내 연차/당직 관리', to: '/user/vacation' },
             ]}
           />
-          {user?.role === UserRole.ADMIN ? (
+          {user.userPayload?.role === 'ADMIN' ? (
             <>
               <NestedNav
                 mainTitle="admin"
