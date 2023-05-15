@@ -445,7 +445,7 @@ function SignupForm() {
                   padding: '5px',
                 }}
               >
-                <label htmlFor="email" style={{ fontWeight: '600', minWidth: '42px' }}>
+                <label htmlFor="email" style={{ fontWeight: '600', minWidth: '42px', paddingTop: '26px' }}>
                   프로필사진
                 </label>
                 {/* <TextField
@@ -461,14 +461,14 @@ function SignupForm() {
                     backgroundColor: theme.app.palette.white,
                   }}
                 /> */}
-                <Avatar alt="user-image" sx={{ width: 150, height: 150 }} src={previewURL} />
+                <Avatar alt="user-image" sx={{ width: 150, height: 150, top: '12%' }} src={previewURL} />
                 <Button
                   variant="contained"
                   component="label"
                   style={{
                     backgroundColor: theme.app.palette.green1,
                     fontSize: theme.app.size.font.medium,
-                    top: '33%',
+                    top: '43%',
                   }}
                 >
                   파일선택
