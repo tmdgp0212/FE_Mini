@@ -4,8 +4,7 @@ import { UserRole } from '../types/user'
 
 function Admin() {
   const user = useProtectedOulet()
-
-  return user && user.role === UserRole.Admin ? <Outlet /> : null
+  return user && user.role === UserRole['ADMIN'] ? <Outlet /> : null
 }
 
 export default Admin
