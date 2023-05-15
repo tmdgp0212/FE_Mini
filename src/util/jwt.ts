@@ -29,3 +29,11 @@ export const registerRefreshToken = async (payload: Record<string, any>, key = '
     .setExpirationTime('30d')
     .sign(new TextEncoder().encode(key))
 }
+
+export const verifyAccessToken = (token: string) => {
+  return jose.jwtVerify(token, new TextEncoder().encode('secret'))
+}
+
+export const verifyRefreshToken = (token: string) => {
+  return jose.jwtVerify(token, new TextEncoder().encode('secretRefresh'))
+}
