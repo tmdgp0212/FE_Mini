@@ -1,15 +1,14 @@
-import { User } from './user'
-
 export interface Vacation {
   id: number
+  memberName: string
+  departmentName: string
   start: string
   end: string
-  member: User
   status: VacationStatus
 }
 
 export enum VacationStatus {
-  'WAITING',
-  'OK',
-  'REJECTED',
+  'WAITING' = 'WAITING',
+  'OK' = 'OK',
+  'REJECTED' = 'REJECTED',
 }
