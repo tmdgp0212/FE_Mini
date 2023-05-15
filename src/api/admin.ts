@@ -17,22 +17,22 @@ export const acceptVacation = async (id: string) => {
 }
 
 export const rejectVacation = async (id: string) => {
-  const res = await instance.post(`/vacation/rejected/${id}`)
+  const res = await instance.post(`/api/v1/vacation/rejected/${id}`)
   return res.data
 }
 
 export const acceptDuty = async (id: string) => {
-  const res = await instance.post(`/duty/ok/${id}`)
+  const res = await instance.post(`/api/v1/duty/ok/${id}`)
   return res.data
 }
 
 export const rejectDuty = async (id: string) => {
-  const res = await instance.post(`/duty/rejected/${id}`)
+  const res = await instance.post(`/api/v1/duty/rejected/${id}`)
   return res.data
 }
 
 export const getSignUp = async () => {
-  const res = await instance.get(`/member/admin/deactivation/list`)
+  const res = await instance.get(`/api/v1/member/admin/deactivation/list`)
   return res.data
 }
 

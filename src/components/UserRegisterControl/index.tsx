@@ -9,8 +9,10 @@ import { useGetSignUp } from '../../hooks/useGetSignUp'
 function UserRegisterControl() {
   const AcceptFunc = useAcceptSignup(true)
   const RejectFunc = useAcceptSignup(false)
-  const getSignUp = useGetSignUp()
-  console.log(getSignUp)
+  const { signup, status } = useGetSignUp()
+
+  console.log({ signup })
+
   const [checkItems, setCheckItems] = useState<string[]>([])
 
   const checkedItemHandler = (id: string, isChecked: boolean) => {
@@ -52,7 +54,7 @@ function UserRegisterControl() {
         />
       </div>
       <S.Container>
-        {testUser.map((user) => (
+        {signup?.data.content.map((user) => (
           <UserRegister
             key={user.employeeNumber}
             user={user}

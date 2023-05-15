@@ -147,33 +147,21 @@ function SignupForm() {
       label: '마케팅',
     },
     {
-      value: '영업',
-      label: '영업',
-    },
-    {
       value: '인사',
       label: '인사',
     },
   ]
   const positions = [
     {
-      value: 'DEPARTMENT_MANAGER',
-      label: '부장',
-    },
-    {
-      value: 'DEPUTY_GENERAL_MANAGER',
-      label: '차장',
-    },
-    {
-      value: 'MANAGER',
-      label: '과장',
+      value: '팀장',
+      label: '팀장',
     },
     {
       value: '대리',
       label: '대리',
     },
     {
-      value: 'STAFF',
+      value: '사원',
       label: '사원',
     },
   ]
