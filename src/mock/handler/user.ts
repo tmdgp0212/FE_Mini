@@ -1,4 +1,20 @@
 import { rest } from 'msw'
+import User from '../user.json'
+
+const user: unknown[] = []
+
+export interface SignupRequestForm {
+  username: string
+  password: string
+  fileName?: string
+  departmentName: string
+  positionName: string
+  phoneNumber: string
+  name: string
+  email: string
+  birthDate: Date
+  joiningDay: Date
+}
 
 export const userHandler = [
   rest.get('/api/v1/member/search', (req, res, ctx) => {
@@ -11,15 +27,13 @@ export const userHandler = [
       }),
     )
   }),
-  rest.get('/api/v1/member/detail/:id', (req, res, ctx) => {
-    const params = req.params
-
+  rest.get('/api/v1/members/detail', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
         status: 200,
-        message: '',
-        data: true,
+        message: 'success',
+        data: User[0],
       }),
     )
   }),
@@ -61,6 +75,48 @@ export const userHandler = [
         status: 200,
         message: '',
         data: true,
+      }),
+    )
+  }),
+  rest.get('/api/v1/join/check', (req, res, ctx) => {
+    const checkTestUserList = [{ username: 'jung1234' }, { username: 'oyster1234' }]
+
+    const usernameQuery = req.url.search.split('?')[1].split('=')[1]
+
+    console.log({ usernameQuery, search: req.url.searchParams })
+
+    const isExistUsername = checkTestUserList.some((testUser) => testUser.username === usernameQuery)
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        status: 200,
+        message: 'success',
+        data: isExistUsername ? true : false,
+      }),
+    )
+  }),
+  rest.get('/api/v1/join', async (req, res, ctx) => {
+    const contentType = req.headers.get('Content-Type')
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        status: 201,
+        message: 'success',
+        data: true,
+      }),
+    )
+  }),
+  rest.post('/api/v1/temp/upload', async (req, res, ctx) => {
+    const body = req.body
+
+    return res(
+      ctx.status(200),
+      ctx.json({
+        status: 200,
+        message: 'success',
+        data: body.fileNames.name,
       }),
     )
   }),

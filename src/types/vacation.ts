@@ -2,11 +2,11 @@ import { BaseEntity } from './common'
 
 export interface VacationEntity {
   id: number
-  name: string
+  memberName: string
   start: string
   end: string
-  deleted: boolean
   status: VacationStatus
+  departmentName: string
 }
 
 export enum VacationStatus {

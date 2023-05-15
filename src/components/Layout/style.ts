@@ -88,7 +88,8 @@ export const NavGroup = styled.div`
 
 export const Page = styled.div`
   position: relative;
-  padding: 40px 80px;
+  padding: 40px;
+  box-sizing: border-box;
   grid-area: page;
   overflow: auto;
 `
