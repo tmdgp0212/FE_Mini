@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query'
-import { getDuty } from '../api/admin'
+import { getDuty } from '../api/duty'
 
-export const useGetDuty = () => {
-  const { data: duty } = useQuery({ queryKey: ['duty'], queryFn: getDuty })
+export const useGetDuty = (month: number) => {
+  const { data: duty } = useQuery(['duty', `${month}`], () => getDuty(month))
   return { duty }
 }

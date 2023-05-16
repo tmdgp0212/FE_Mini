@@ -63,7 +63,7 @@ export const testUser = [
 ]
 
 function UserScheduleControl() {
-  const duty = useGetDuty()
+  const duty = useGetDuty(0)
   const vacations = useGetVacation()
   console.log(duty, vacations)
   const [type, setType] = useState('duty')
