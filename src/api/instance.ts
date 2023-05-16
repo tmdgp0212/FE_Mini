@@ -3,7 +3,7 @@ import { getCookie } from '../util/cookies'
 
 const getInstance = () => {
   const instance = axios.create({
-    baseURL: 'http://52.78.232.110:9090/',
+    baseURL: 'http://3.38.103.48:8080/',
     // headers: {
     //   Authorization: ''
     // },
